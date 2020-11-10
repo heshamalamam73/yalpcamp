@@ -1,0 +1,105 @@
+@import url("https://fonts.googleapis.com/css2?family=Lobster&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+.App {
+  min-height: 100vh;
+}
+.home {
+  background-image: url("https://images.pexels.com/photos/939723/pexels-photo-939723.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  position: relative;
+}
+.nav,
+.nav-bar,
+a,
+p {
+  font-family: "Lobster", cursive !important;
+  text-decoration: none !important;
+}
+.home .content {
+  position: absolute;
+  top: 20%;
+  left: 10%;
+}
+.home .content h1 {
+  font-family: "Lobster", cursive;
+  padding-bottom: 20px;
+  text-shadow: 1px 1px 0px rgba(255, 255, 255);
+}
+.buttonA {
+  font-family: "Lobster", cursive;
+  letter-spacing: 1px;
+  display: block;
+  text-decoration: none;
+  background-color: #343a40;
+  padding: 10px;
+  text-align: center;
+  border-radius: 10px;
+  color: white;
+  margin: 10px;
+  max-width: 200px;
+  opacity: 0.9;
+  cursor: pointer;
+}
+.buttonA:hover {
+  opacity: 1;
+  color: white;
+}
+.footer {
+  height: 50px;
+  text-align: center;
+  background-color: #343a40;
+  color: white;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  text-transform: capitalize;
+}
+.campgrounds {
+  padding: 20px;
+  height: auto !important;
+  min-height: auto !important;
+}
+.campground {
+  padding: 10px;
+  text-align: center;
+  height: auto !important;
+  max-height: auto !important;
+}
+.campground img {
+  max-height: 200px;
+}
+#descText {
+  height: 110px;
+  white-space: wrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.content {
+  text-align: center;
+}
+.show-camp {
+  text-transform: capitalize;
+}
+.show-camp img {
+  max-height: 60vh;
+}
+
+.create-camp .form {
+  background-color: #343a40;
+  color: white;
+  min-height: 80vh;
+  margin: 0px auto;
+  width: 100%;
+  max-width: 500px;
+  border-radius: 0 0 40px 40px;
+  text-align: left;
+  padding: 30px;
+  box-shadow: 0px 1px 3px 2px black;
+  font-family: "Source Code Pro", monospace;
+}
+button {
+  margin: 10px !important;
+}

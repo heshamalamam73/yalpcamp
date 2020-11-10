@@ -1,0 +1,25 @@
+{
+  "name": "yalpcamps",
+  "type": "module",
+  "version": "1.0.0",
+  "description": "yalpcamp project ",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "mahmoud okily",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/node": "^7.12.1",
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.3.0",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.10.13",
+    "multer": "^1.4.2",
+    "nodemon": "^2.0.6"
+  }
+}
