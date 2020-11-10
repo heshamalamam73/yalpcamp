@@ -25,7 +25,7 @@ function userRigesterReducer(state = {}, action) {
   }
 }
 const initialState = {
-  isAuthenticated: localStorage.getItem("token") ? true : false,
+  isAuthenticated: localStorage.token ? true : false,
   userInfo: {},
 };
 

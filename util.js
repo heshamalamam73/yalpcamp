@@ -21,7 +21,7 @@ const isAuth = (req, res, next) => {
     const onlyToken = token.slice(7, token.length);
     jwt.verify(onlyToken, config.JWT_SECRET_KEY, (err, decode) => {
       if (err) {
-        return res.status(401).send({ msg: "invalid token" });
+        return res.status(401).send({ msg: "please Log in First " });
       }
       req.user = decode;
       next();

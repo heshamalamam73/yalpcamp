@@ -12,7 +12,11 @@ import {
 } from "../constants/userActionType";
 import Cookie from "js-cookie";
 import axios from "axios";
-import setAuthorizationToken from "../components/helper/setAuthToken";
+import setAuthToken from "../components/helper/setAuthToken";
+
+export function setAuthorizationToken(token) {
+  setAuthToken(token);
+}
 const Rigester = (email, password, name) => async (dispatch) => {
   dispatch({
     type: USER_RIGESTER_REQUEST,
@@ -35,8 +39,8 @@ const signin = (email, password) => async (dispatch) => {
   try {
     const { data } = await axios.post("api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
-    Cookie.set("userInfo", JSON.stringify(data));
     localStorage.setItem("token", JSON.stringify(data.token));
+    localStorage.setItem("userInfo", JSON.stringify(data));
     setAuthorizationToken(data.token);
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error });
@@ -44,9 +48,9 @@ const signin = (email, password) => async (dispatch) => {
 };
 const signout = () => async (dispatch) => {
   dispatch({ type: USER_SIGNOUT_REQUEST });
-  localStorage.removeItem("token");
-  Cookie.remove("userInfo");
-  dispatch({ type: USER_SIGNOUT_SUCCESS });
+  localStorage.clear();
+  setAuthorizationToken(false);
+  dispatch(signin({}));
 };
 
 export { signin, Rigester, signout };

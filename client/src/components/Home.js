@@ -9,8 +9,10 @@ function Home(props) {
     ? props.location.search.split("=")[1]
     : "/campgrounds";
   useEffect(() => {
-    if (isAuthenticated) {
+    if (userInfo) {
       props.history.push(redirect);
+    } else {
+      props.history.push("/");
     }
     return () => {
       //

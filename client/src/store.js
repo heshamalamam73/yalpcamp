@@ -7,11 +7,13 @@ import {
   userSignoutReducer,
 } from "./reducers/userReducer.js";
 import thunk from "redux-thunk";
-const userInfo = Cookie.getJSON("userinfo") || null;
+const userInfo = localStorage.userInfo || null;
+const isAuthenticated = localStorage.token ? true : false;
 
 const initialState = {
   userSignin: { userInfo },
   userRigester: {},
+  isAuthenticated,
 };
 const reducer = combineReducers({
   userSignin: userSigninReducer,

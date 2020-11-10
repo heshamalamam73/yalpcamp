@@ -13,13 +13,17 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SignInScreen from "./components/User/SigninScreen";
+
 function App() {
   const userSignin = useSelector((state) => state.userSignin);
   const { userInfo } = userSignin;
+
   return (
     <Router>
       <div className="App">
         <Header userInfo={userInfo} />
+        {console.log(userSignin)}
+
         <div className="content">
           <Route path="/" component={Home} exact={true} />
           <Route path="/campgrounds" component={Campgrounds} exact={true} />

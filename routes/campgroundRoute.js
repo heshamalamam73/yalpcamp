@@ -2,6 +2,7 @@ import express from "express";
 import Campground from "../models/campgroundModel.js";
 import Review from "../models/ReviewModel.js";
 import catchAsync from "../helpers/catchAsync.js";
+import { isAuth } from "../util.js";
 
 const router = express.Router();
 

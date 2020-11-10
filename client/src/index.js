@@ -7,11 +7,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./store";
 import Cookie from "cookie";
-import setAuthorizationToken from "./components/helper/setAuthToken";
+import { setAuthorizationToken, signin } from "./action/userAction";
+import jwtDecode from "jwt-decode";
+
 if (localStorage.token) {
   setAuthorizationToken(localStorage.token);
+  // try {
+  //   store.dispatch(signin(jwtDecode(localStorage.token)));
+  // } catch (err) {
+  //   store.dispatch(signin({}));
+  // }
 }
-
 ReactDOM.render(
   <Provider store={store}>
     <App />
