@@ -21,9 +21,11 @@
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
     "web-vitals": "^0.2.4",
-    "yarn": "^1.22.10"
+    "yarn": "^1.22.10",
+    "serve": "^11.3.2"
   },
   "scripts": {
+    "dev": "react-scripts start ",
     "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
