@@ -1,12 +1,12 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import Campground from "./Campground";
-import { Container, Col, Row } from "react-bootstrap";
+import { Row } from "react-bootstrap";
 
 function Campgrounds(props) {
   const [campgrounds, setCampgrounds] = useState([]);
   useEffect(() => {
-    axios.get("/campgrounds").then((res) => {
+    axios.get("/api/campgrounds").then((res) => {
       setCampgrounds(res.data);
       console.log(res);
     });

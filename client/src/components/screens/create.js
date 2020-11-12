@@ -19,7 +19,7 @@ function CreateCampground(props) {
 
     const campground = { title, location, image, description, price };
     axios
-      .post("/campgrounds", campground)
+      .post("/api//campgrounds", campground)
       .then((res) => {
         // props.history.push("/campgrounds");
       })

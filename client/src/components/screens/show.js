@@ -12,7 +12,7 @@ function ShowCampground(props) {
   useEffect(async () => {
     validationFunc();
 
-    await axios.get(`/campgrounds/${campId}`).then((res) => {
+    await axios.get(`/api/campgrounds/${campId}`).then((res) => {
       setCampground(res.data.campground);
       console.log(res.data);
     });
@@ -20,9 +20,9 @@ function ShowCampground(props) {
   const handleDelete = (e) => {
     e.preventDefault();
     axios
-      .delete(`/campgrounds/${campId}`)
+      .delete(`/api/campgrounds/${campId}`)
       .then((res) => {
-        props.history.push(`/campgrounds`);
+        props.history.push(`/api/campgrounds`);
       })
       .catch((err) => {
         console.log(err);
@@ -31,7 +31,7 @@ function ShowCampground(props) {
   const handleSubmitReview = (e) => {
     const review = { rating, textComment };
     e.preventDefault();
-    axios.post(`/campgrounds/${campId}/reviews`, review).then((res) => {});
+    axios.post(`/api/campgrounds/${campId}/reviews`, review).then((res) => {});
   };
   return (
     <Container className="show-camp">

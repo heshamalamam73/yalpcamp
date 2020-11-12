@@ -22,7 +22,6 @@ function App() {
     <Router>
       <div className="App">
         <Header userInfo={userInfo} />
-        {console.log(userSignin)}
 
         <div className="content">
           <Route path="/" component={Home} exact={true} />

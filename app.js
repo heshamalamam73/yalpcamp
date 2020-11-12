@@ -25,7 +25,7 @@ mongoose
   })
   .catch((error) => console.log(error));
 app.use("/api/users", userRoute);
-app.use("/campgrounds", campgroundRoute);
+app.use("/api/campgrounds", campgroundRoute);
 // app.all("*", (req, res, next) => {
 //   res.send("Page Not Found ");
 // });

@@ -1,10 +1,9 @@
-import react from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useEffect } from "react";
 
 function Home(props) {
   const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo, isAuthenticated } = userSignin;
+  const { userInfo } = userSignin;
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/campgrounds";
@@ -17,7 +16,7 @@ function Home(props) {
     return () => {
       //
     };
-  }, [userInfo]);
+  }, [userInfo, props.history, redirect]);
   return (
     <div className="home">
       <div className="content">

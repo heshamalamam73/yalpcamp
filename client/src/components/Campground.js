@@ -6,7 +6,7 @@ function Campground(props) {
   return (
     campground && (
       <Col className="campground" xs={12} md={6} lg={4} xl={3}>
-        <Link to={"campgrounds/" + campground._id}>
+        <Link to={"/api/campgrounds/" + campground._id}>
           <Card>
             <Card.Img variant="top" src={campground.image} />
             <Card.Body>
