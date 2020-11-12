@@ -8,6 +8,8 @@ import bodyParser from "body-parser";
 import campgroundRoute from "./routes/campgroundRoute.js";
 import { seedDb } from "./seeds/index.js";
 import path from "path";
+const __dirname = path.resolve();
+
 dotenv.config();
 
 const app = express();
