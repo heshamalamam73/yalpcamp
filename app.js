@@ -23,9 +23,9 @@ mongoose
   .catch((error) => console.log(error));
 app.use("/api/users", userRoute);
 app.use("/campgrounds", campgroundRoute);
-app.all("*", (req, res, next) => {
-  res.send("Page Not Found ");
-});
+// app.all("*", (req, res, next) => {
+//   res.send("Page Not Found ");
+// });
 if (process.env.NODE_ENV) {
   app.use(express.static("client/build"));
   app.get("*", (req, res) => {
