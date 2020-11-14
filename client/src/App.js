@@ -1,11 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
-import react, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
-import { BrowserRouter as Router, Link, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 import Campgrounds from "./components/Campgrounds";
-import Campground from "./components/Campground";
 import ShowCampground from "./components/screens/show";
 import CreateCampground from "./components/screens/create";
 import UpdateCampground from "./components/screens/update";

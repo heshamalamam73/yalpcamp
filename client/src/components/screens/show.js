@@ -1,7 +1,7 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { validationFunc } from "../helper/validationForms.js";
-
+import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 function ShowCampground(props) {
   const campId = props.match.params.id;
@@ -9,14 +9,12 @@ function ShowCampground(props) {
   const [rating, setRating] = useState(0);
   const [textComment, setTextComment] = useState("");
 
-  useEffect(async () => {
+  useEffect(() => {
     validationFunc();
-
-    await axios.get(`/api/campgrounds/${campId}`).then((res) => {
-      setCampground(res.data.campground);
-      console.log(res.data);
+    axios.get(`/api/campgrounds/${campId}`).then((res) => {
+      setCampground(res.data);
     });
-  }, []);
+  }, [campId]);
   const handleDelete = (e) => {
     e.preventDefault();
     axios
@@ -33,35 +31,45 @@ function ShowCampground(props) {
     e.preventDefault();
     axios.post(`/api/campgrounds/${campId}/reviews`, review).then((res) => {});
   };
+
   return (
     <Container className="show-camp">
+      <Breadcrumb>
+        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+        <Breadcrumb.Item
+          active
+          href="https://getbootstrap.com/docs/4.0/components/breadcrumb/"
+        >
+          {campground.title}
+        </Breadcrumb.Item>
+      </Breadcrumb>
+
       {campground && (
         <Row>
           <Col xl={7} className="cardBody">
             <Card>
               <Card.Img variant="top" src={campground.image} />
               <Card.Body>
+                <div className="mar-l">
+                  <Card.Title>{campground.title}</Card.Title>
+
+                  <Card.Title className="text">{campground.price} $</Card.Title>
+                </div>
                 <Card.Text>{campground.description}</Card.Text>
+                <div className="mar-r">
+                  <a className="show-btn" href={campground._id + "/edit"}>
+                    Edit
+                  </a>
+                  <button className="show-btn" onClick={handleDelete}>
+                    Delete
+                  </button>
+                </div>
               </Card.Body>
             </Card>
           </Col>
           <Col xl={5}>
             <Card>
               <Card.Body className="content">
-                <Card.Title>{campground.title}</Card.Title>
-
-                <Card.Title className="text">{campground.price} $</Card.Title>
-
-                <a className="buttonA" href={campground._id + "/edit"}>
-                  Edit Campground
-                </a>
-                <a className="buttonA" onClick={handleDelete}>
-                  Delete Campground
-                </a>
-
-                <a className="buttonA" href="/campgrounds">
-                  All Campgrounds
-                </a>
                 <hr />
 
                 <Form

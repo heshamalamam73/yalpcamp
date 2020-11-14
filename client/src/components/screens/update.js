@@ -1,6 +1,6 @@
-import react, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { Form, Button, Container, Row } from "react-bootstrap";
 import { validationFunc } from "../helper/validationForms.js";
 
 function UpdateCampground(props) {
@@ -12,19 +12,19 @@ function UpdateCampground(props) {
   const id = props.match.params.id;
 
   useEffect(() => {
-    axios.get(`/campgrounds/${id}`).then((res) => {
-      setTitle(res.data.campground.title);
-      setLocation(res.data.campground.location);
-      setPrice(res.data.campground.price);
-      setDescription(res.data.campground.description);
-      setImage(res.data.campground.image);
+    axios.get(`/api/campgrounds/${id}`).then((res) => {
+      setTitle(res.data.title);
+      setLocation(res.data.location);
+      setPrice(res.data.price);
+      setDescription(res.data.description);
+      setImage(res.data.image);
     });
     validationFunc();
-  }, []);
+  }, [id]);
   const handleSubmit = (e) => {
     e.preventDefault();
     const campground = { title, location, id, description, price, image };
-    axios.put(`/campgrounds/${id}`, campground).then((res) => {
+    axios.put(`/api/campgrounds/${id}`, campground).then((res) => {
       props.history.push(`/campgrounds/${id}`);
     });
   };

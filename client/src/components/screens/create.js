@@ -1,8 +1,7 @@
-import react, { useState, useEffect } from "react";
-import { Form, Button, Container, Row, Col } from "react-bootstrap";
+import { useState, useEffect } from "react";
+import { Form, Button, Container, Row } from "react-bootstrap";
 import axios from "axios";
 import { validationFunc } from "../helper/validationForms.js";
-import { useSelector, useDispatch } from "react-redux";
 
 function CreateCampground(props) {
   const [title, setTitle] = useState("");
@@ -10,9 +9,6 @@ function CreateCampground(props) {
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
-  const [validated, setValidated] = useState(false);
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
 
   const handleSubmit = (e) => {
     e.preventDefault();

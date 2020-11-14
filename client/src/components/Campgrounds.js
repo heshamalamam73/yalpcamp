@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Campground from "./Campground";
-import { Row } from "react-bootstrap";
+import { Row, Jumbotron, Button, Container } from "react-bootstrap";
 
 function Campgrounds(props) {
   const [campgrounds, setCampgrounds] = useState([]);
@@ -13,14 +13,18 @@ function Campgrounds(props) {
   }, []);
 
   return (
-    <div className="campgrounds">
+    <Container className="campgrounds">
+      <Jumbotron>
+        <h1>Gallery</h1>
+        <p>a lot of beauteful Campgrounds you will found here ! </p>
+      </Jumbotron>
       <Row>
         {campgrounds &&
           campgrounds.map((campground) => (
             <Campground campground={campground} id={campground._id} />
           ))}
       </Row>
-    </div>
+    </Container>
   );
 }
 export default Campgrounds;
