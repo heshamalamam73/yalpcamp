@@ -5,7 +5,8 @@ const reviewSchema = new mongoose.Schema({
   author : { 
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
-  }
+  },
+  campground : { type: mongoose.Schema.Types.ObjectId, ref: "Campground"}
 });
 const ReviewModel = mongoose.model("Review", reviewSchema);
 export default ReviewModel;

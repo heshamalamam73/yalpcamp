@@ -6,7 +6,7 @@ import {
   userSignoutReducer,
   setCurrentUser
 } from "./reducers/userReducer.js";
-import {addNewReviewReducer , DeleteReviewReducer } from "./reducers/reviewsReducer";
+import {addNewReviewReducer , DeleteReviewReducer,getAllReviewsReducer } from "./reducers/reviewsReducer";
 import {postNewCampgroundReducer } from './reducers/campgroundReducer'
 import {renderAllCampgroundsReducer ,renderUnCampgroundReducer} from "./reducers/campgroundReducer"
 import thunk from "redux-thunk";
@@ -19,7 +19,8 @@ const reducer = combineReducers({
   rendercampground : renderUnCampgroundReducer,
   currentUser : setCurrentUser,
   postCampground :postNewCampgroundReducer,
-  NewReview :addNewReviewReducer
+  NewReview :addNewReviewReducer,
+  allReviews : getAllReviewsReducer
 
 });
 const composeEnhancers =

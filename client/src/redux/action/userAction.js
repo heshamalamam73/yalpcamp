@@ -32,6 +32,13 @@ const Rigester = (email, password, name) => async (dispatch) => {
       name,
     });
     dispatch({ type: USER_RIGESTER_SUCCESS, payload: data });
+    localStorage.setItem("token", JSON.stringify(data.token));
+    setAuthorizationToken(data.token);
+    dispatch(setCurrentUser(data))
+
+
+
+
   } catch (error) {
     dispatch({ type: USER_RIGESTER_FAIL, payload: error.message });
   }

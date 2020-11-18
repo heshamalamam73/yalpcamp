@@ -26,8 +26,8 @@ function SignInScreen(props) {
   useEffect(() => {
     validationFunc();
     if (isAuhenticated) {
-      props.history.push(redirect);
-    }
+      props.history.push('/')
+          }
     return () => {
       //
     };

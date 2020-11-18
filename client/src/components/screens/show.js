@@ -19,7 +19,7 @@ function ShowCampground(props) {
   useEffect(() => {
     validationFunc();
     dispatch(renderUnCampground(campId))
-  }, [dispatch,newreview]);
+  }, []);
   const handleDelete = (e) => {
     e.preventDefault();
     axios
@@ -55,10 +55,12 @@ function ShowCampground(props) {
               <Card.Body>
                 <div className="mar-l">
                   <Card.Title>{campground.title}</Card.Title>
+
                   <Card.Title className="text">{campground.price} $</Card.Title>
                 </div>
-                <Card.Text>{campground.description}</Card.Text>
                 <p>by/ {campground.author && campground.author.name}</p>
+
+                <Card.Text>{campground.description}</Card.Text>
                 {campground.author && campground.author._id  === user._id &&(          
                 <div className="mar-r">
                     <a className="show-btn" href={campground._id + "/edit"}>
@@ -76,16 +78,7 @@ function ShowCampground(props) {
           <Col xl={5}>
             <Card>
               <Card.Body className="reviews">
-                <div>
-        
-                </div>
-                <hr />
-                  <ReviewsHandler  campId={campId} user={user} campground ={campground} isAuhenticated={isAuhenticated}/>
-                  
-                
-
-               
-   
+                  <ReviewsHandler  campId={campId} currentUserId={user._id}  isAuhenticated={isAuhenticated}/>
               </Card.Body>
             </Card>
           </Col>

@@ -20,7 +20,6 @@ function CreateCampground(props) {
     if (!isAuhenticated ){
       props.history.push(`/signin`);
       
-
     }
     console.log(user._id)
   }, [isAuhenticated , user ]);
@@ -30,7 +29,7 @@ function CreateCampground(props) {
     const campground = { title, location, image, description, price, author };
  
     dispatch(postNewCampground(campground));
-    props.history.push(`/campgrounds/`);
+    props.history.push(`/`);
 
   };
 

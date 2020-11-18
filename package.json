@@ -2,6 +2,7 @@
   "name": "yalpcamps",
   "type": "module",
   "version": "1.0.0",
+
   "description": "yalpcamp project ",
   "main": "app.js",
   "scripts": {

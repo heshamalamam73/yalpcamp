@@ -6,7 +6,7 @@ import { isAuth } from "../util.js";
 
 const router = express.Router();
 
-router.get("/", async (req, res) => {
+router.get("/",async (req, res) => {
   const campgrounds = await Campground.find({});
   res.send(campgrounds);
 });
@@ -75,16 +75,24 @@ router.delete(
 router.post(
   "/:id/reviews",
   catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id);
+    const campground = await Campground.findById(req.params.id)
     const review = new Review({
       textComment: req.body.textComment,
       rating: req.body.rating,
       author: req.body.author,
+      campground: req.params.id,
     });
     campground.reviews.push(review);
     await review.save();
     await campground.save();
     res.status(200).send(review);
+  })
+);
+router.get(
+  "/:id/reviews",
+  catchAsync(async (req, res) => {
+    const reviews = await Review.find({ campground:req.params.id}).populate("author")
+    res.status(200).send(reviews);
   })
 );
 

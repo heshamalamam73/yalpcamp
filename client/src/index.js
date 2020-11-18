@@ -7,7 +7,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Provider } from "react-redux";
 import store from "./redux/store";
 import { setAuthorizationToken, setCurrentUser } from "./redux/action/userAction";
-import jwtDecode from "jwt-decode";
+import jwtDecode from "jwt-decode"; 
 
 
 if (localStorage.token) {

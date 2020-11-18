@@ -94,7 +94,7 @@ p {
 }
 .campground {
   padding: 10px;
-  text-align: center;
+  /* text-align: center; */
   height: auto !important;
   max-height: auto !important;
 }
@@ -108,7 +108,7 @@ p {
   text-overflow: ellipsis;
 }
 .content {
-  text-align: center;
+  /* text-align: center; */
 }
 .show-camp {
   text-transform: capitalize;
@@ -138,23 +138,29 @@ button {
   margin: 10px !important;
 }
 
-.reviews .review-item {
-  width:100%;
-   border:1px solid #eee;
-   display:flex;
-   flex-direction:row;
-   justify-content: space-between;
-   padding:4px 10px;
-   text-align: left ;
-   margin:auto auto;
-   font-size: 8px;
 
-
-  
+.review-item {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  border-bottom: 2px solid #eee;
+  padding:10px;
+  margin: 10px;
 }
 
-
-
+.review-item .rating {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding:10px 0px;
+}
+.review-item .review-comment{
+  font-size: 4px;
+}
+.review-item button{
+  font-size:4px;
+}
 
 /* css reset */
 html, body, div, span, applet, object, iframe,

@@ -1,65 +1,72 @@
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { validationFunc } from "../../redux/helper/validationForms.js";
-import {addNewReview } from '../../redux/action/reviewsAction'
+import {addNewReview,getReviews } from '../../redux/action/reviewsAction'
 import {useDispatch, useSelector} from "react-redux"
+import ReviewItem from './ReviewItem.js'
 
 
 function ReviewsHandler(props){
     const [rating, setRating] = useState(0);
     const [textComment, setTextComment] = useState("");
-    
+    const [allreviews , setAllreviews] = useState([])
     const dispatch = useDispatch();
-    const {user , campground,isAuhenticated }= props;
+    const {currentUserId ,isAuhenticated,campId }= props;
+    const allReviews = useSelector((state) => state.allReviews);
 
+    const {reviews , success , error,loading} = allReviews;
 
-    const handleSubmitReview = (e) => {
-        e.preventDefault();
-        const author = props.user._id;
-        const review = { rating, textComment , author};
-        dispatch(addNewReview(props.campId,review));
-    
-    
-      };
     useEffect(() => {
+        dispatch(getReviews(campId));
+        if(reviews){
+            setAllreviews(reviews);
+        }
+    },[])
+    const handleSubmitReview = (e) => {
+
+        e.preventDefault();
+        const author = currentUserId;
+        const review = { rating, textComment , author};
         validationFunc();
 
-    },[])
+        dispatch(addNewReview(props.campId,review));
+        document.getElementById("form").reset();
+
+    
+      };
+ 
 
 return(
     <div>
-       { campground.reviews&& campground.reviews.length > 0 && campground.reviews.map(review => {
-                return(
-                  <div className="review-item" key={review._id}>
-                    <div>
-                    <span>{review.rating}</span>
-                    <span> <span>mido imam :</span>{review.textComment}</span>
-                    </div>
-                    {review.author === user._id && <span>Delete </span>}
-
-                  </div>
-                ) 
-                })}
-
+      <p>Reviews </p>
+      <hr />
+       {  allreviews.map(review => < ReviewItem review={review} currentUserId ={currentUserId}  />)}
                 {isAuhenticated?(
-    <Form
+                  <Form
                    onSubmit={handleSubmitReview}
                    className="needs-validation"
                    noValidate
+                   id='form'
                  >
                    <Form.Group controlId="formBasicRange">
-                     <Form.Label>Range</Form.Label>
-                     <Form.Control
-                       type="range"
-                       min="0"
-                       max="5"
-                       onChange={(e) => setRating(e.target.value)}
-                       required
-                     />
+                     <Form.Label>Leave Your Review </Form.Label>
+                     <fieldset class="starability-basic">
+                    <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="0" checked aria-label="No rating."  />
+                    <input type="radio" id="first-rate1" name="rating" value="1" onChange={(e) => setRating(e.target.value)} />
+                    <label for="first-rate1" title="Terrible" >1 star</label>
+                    <input type="radio" id="first-rate2" name="rating" value="2"  onChange={(e) => setRating(e.target.value)}/>
+                    <label for="first-rate2" title="Not good">2 stars</label>
+                    <input type="radio" id="first-rate3" name="rating" value="3" onChange={(e) => setRating(e.target.value)} />
+                    <label for="first-rate3" title="Average">3 stars</label>
+                    <input type="radio" id="first-rate4" name="rating" value="4" onChange={(e) => setRating(e.target.value)} />
+                    <label for="first-rate4" title="Very good">4 stars</label>
+                    <input type="radio" id="first-rate5" name="rating" value="5" onChange={(e) => setRating(e.target.value)} />
+                    <label for="first-rate5" title="Amazing">5 stars</label>
+                  </fieldset>
                    </Form.Group>
                   
+                                    
                    <Form.Group controlId="exampleForm.ControlTextarea1">
-                     <Form.Label>Example textarea</Form.Label>
                      <Form.Control
                        as="textarea"
                        rows={2}
