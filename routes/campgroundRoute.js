@@ -19,6 +19,7 @@ router.post(
       price: req.body.price,
       image: req.body.image,
       description: req.body.description,
+      author: req.body.author,
     });
     const newCampground = await campground.save();
     if (newCampground) {
@@ -32,9 +33,9 @@ router.post(
 router.get(
   "/:id",
   catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id).populate(
-      "reviews"
-    );
+    const campground = await Campground.findById(req.params.id)
+      .populate("reviews")
+      .populate("author");
     res.send(campground);
   })
 );
@@ -78,6 +79,7 @@ router.post(
     const review = new Review({
       textComment: req.body.textComment,
       rating: req.body.rating,
+      author: req.body.author,
     });
     campground.reviews.push(review);
     await review.save();

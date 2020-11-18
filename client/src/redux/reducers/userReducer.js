@@ -1,4 +1,3 @@
-import isEmpty from "lodash/isEmpty";
 
 const {
   USER_SIGNIN_REQUEST,
@@ -11,7 +10,7 @@ const {
   SET_CURRENT_USER,
   USER_RIGESTER_FAIL,
   USER_RIGESTER_REQUEST,
-} = require("../constants/userActionType");
+} = require("../actionTypes/userActionType");
 function userRigesterReducer(state = {}, action) {
   switch (action.type) {
     case USER_RIGESTER_REQUEST:
@@ -24,23 +23,34 @@ function userRigesterReducer(state = {}, action) {
       return state;
   }
 }
-const initialState = {
-  isAuthenticated: localStorage.token ? true : false,
-  userInfo: {},
+const DEFAULT_STATE = {
+  isAuhenticated: false,
+  user: {},
 };
 
-function userSigninReducer(state = initialState, action) {
+function setCurrentUser(state = DEFAULT_STATE, action) {
+  switch (action.type) {
+    case SET_CURRENT_USER:
+      return {
+        isAuhenticated: !!Object.keys(action.payload).length,
+        user: action.payload,
+      };
+    default:
+      return state;
+  }
+}
+function userSigninReducer(state = DEFAULT_STATE, action) {
   switch (action.type) {
     case USER_SIGNIN_REQUEST:
-      return { loading: true, isAuthenticated: false };
+      return { loading: true};
     case USER_SIGNIN_SUCCESS:
       return {
         loading: false,
-        isAuthenticated: true,
         userInfo: action.payload,
+        message: action.payload.message,
       };
     case USER_SIGNIN_FAIL:
-      return { loading: false, error: action.payload, isAuthenticated: false };
+      return { loading: false, error: action.payload,userInfo: null,  };
     default:
       return state;
   }
@@ -59,4 +69,4 @@ function userSignoutReducer(state = {}, action) {
   }
 }
 
-export { userSigninReducer, userRigesterReducer, userSignoutReducer };
+export { userSigninReducer, userRigesterReducer, userSignoutReducer,setCurrentUser };

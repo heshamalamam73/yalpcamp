@@ -2,25 +2,28 @@ import {
   USER_SIGNIN_FAIL,
   USER_SIGNIN_REQUEST,
   USER_SIGNIN_SUCCESS,
-  USER_SIGNOUT_FAIL,
-  USER_SIGNOUT_REQUEST,
-  USER_SIGNOUT_SUCCESS,
   SET_CURRENT_USER,
   USER_RIGESTER_REQUEST,
   USER_RIGESTER_SUCCESS,
   USER_RIGESTER_FAIL,
-} from "../constants/userActionType";
-import Cookie from "js-cookie";
+} from "../actionTypes/userActionType";
 import axios from "axios";
-import setAuthToken from "../components/helper/setAuthToken";
+import setAuthToken from "../helper/setAuthToken";
+
+
 
 export function setAuthorizationToken(token) {
   setAuthToken(token);
 }
+
+ const setCurrentUser = (user)=> async (dispatch) => {
+  dispatch({type:SET_CURRENT_USER, payload:user})
+}
+
+
 const Rigester = (email, password, name) => async (dispatch) => {
   dispatch({
-    type: USER_RIGESTER_REQUEST,
-    payload: { email, password, name },
+    type: USER_RIGESTER_REQUEST
   });
   try {
     const { data } = await axios.post("api/users/rigester", {
@@ -35,22 +38,21 @@ const Rigester = (email, password, name) => async (dispatch) => {
 };
 
 const signin = (email, password) => async (dispatch) => {
-  dispatch({ type: USER_SIGNIN_REQUEST, payload: { email, password } });
+  dispatch({ type: USER_SIGNIN_REQUEST,payload: { email, password }});
   try {
     const { data } = await axios.post("api/users/signin", { email, password });
     dispatch({ type: USER_SIGNIN_SUCCESS, payload: data });
     localStorage.setItem("token", JSON.stringify(data.token));
-    localStorage.setItem("userInfo", JSON.stringify(data));
     setAuthorizationToken(data.token);
+    dispatch(setCurrentUser(data))
   } catch (error) {
     dispatch({ type: USER_SIGNIN_FAIL, payload: error });
   }
 };
 const signout = () => async (dispatch) => {
-  dispatch({ type: USER_SIGNOUT_REQUEST });
   localStorage.clear();
   setAuthorizationToken(false);
-  dispatch(signin({}));
+  dispatch(setCurrentUser({}));
 };
 
-export { signin, Rigester, signout };
+export { signin, Rigester, signout ,setCurrentUser }

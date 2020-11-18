@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Form, Button, Container, Row } from "react-bootstrap";
-import { validationFunc } from "../helper/validationForms.js";
+import { validationFunc } from "../../redux/helper/validationForms";
 
 function UpdateCampground(props) {
   const [title, setTitle] = useState("");

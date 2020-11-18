@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Form, Button, Container, Row, Col, Alert } from "react-bootstrap";
 import axios from "axios";
-import { validationFunc } from "../helper/validationForms.js";
+import { validationFunc } from "../../redux/helper/validationForms";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { signin, Rigester } from "../../action/userAction.js";
+import { signin, Rigester } from "../../redux/action/userAction";
 
 function SignInScreen(props) {
   const [email, setEmail] = useState("");
@@ -13,8 +13,9 @@ function SignInScreen(props) {
   const [password, setPassword] = useState("");
   const userRigester = useSelector((state) => state.userRigester);
   const userSignin = useSelector((state) => state.userSignin);
-  const { loading, userInfo, error } = userSignin;
-  const { loading2, data, error2 } = userRigester;
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated} = currentUser
+
 
   const dispatch = useDispatch();
 
@@ -23,16 +24,14 @@ function SignInScreen(props) {
     : "/";
   const signup = props.match.url === "/signup" ? true : false;
   useEffect(() => {
-    if (userInfo || data) {
+    validationFunc();
+    if (isAuhenticated) {
       props.history.push(redirect);
     }
-
-    validationFunc();
-
     return () => {
       //
     };
-  }, [userInfo, data]);
+  }, [isAuhenticated]);
   const handleSubmit = (e) => {
     e.preventDefault();
     signup
@@ -49,9 +48,7 @@ function SignInScreen(props) {
         >
           <h1>{signup ? "Sign up" : "Sign In"}</h1>
           <hr />
-          {loading || (loading2 && <Alert color="info">Loading....</Alert>)}
-          {error && <Alert color="warning">Invaled Email or Password</Alert>}
-          {error2 && <Alert color="warning">Invaled Email or Password</Alert>}
+    
 
           <Form.Group controlId="Email">
             <Form.Label>Email Address</Form.Label>

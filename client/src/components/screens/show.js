@@ -1,20 +1,25 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { validationFunc } from "../helper/validationForms.js";
+import { validationFunc } from "../../redux/helper/validationForms.js";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Container, Row, Col, Card, Button, Form } from "react-bootstrap";
+import {useDispatch, useSelector} from "react-redux"
+import {renderUnCampground} from '../../redux/action/campgroundAction';
+import ReviewsHandler from "./reviews"
 function ShowCampground(props) {
   const campId = props.match.params.id;
-  const [campground, setCampground] = useState({});
-  const [rating, setRating] = useState(0);
-  const [textComment, setTextComment] = useState("");
+  const dispatch = useDispatch();
+  const rendercampground = useSelector((state) => state.rendercampground);
+  const {campground,loading, error} = rendercampground;
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated,user } = currentUser;
+  const NewReview = useSelector((state) => state.NewReview);
+  const {newreview} = NewReview;
 
   useEffect(() => {
     validationFunc();
-    axios.get(`/api/campgrounds/${campId}`).then((res) => {
-      setCampground(res.data);
-    });
-  }, [campId]);
+    dispatch(renderUnCampground(campId))
+  }, [dispatch,newreview]);
   const handleDelete = (e) => {
     e.preventDefault();
     axios
@@ -23,24 +28,22 @@ function ShowCampground(props) {
         props.history.push(`/api/campgrounds`);
       })
       .catch((err) => {
-        console.log(err);
+     
       });
   };
-  const handleSubmitReview = (e) => {
-    const review = { rating, textComment };
-    e.preventDefault();
-    axios.post(`/api/campgrounds/${campId}/reviews`, review).then((res) => {});
-  };
+
 
   return (
     <Container className="show-camp">
+      {error && <div>{error} </div>}
+      {loading && <div>Loading...</div>}
       <Breadcrumb>
         <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
         <Breadcrumb.Item
           active
           href="https://getbootstrap.com/docs/4.0/components/breadcrumb/"
         >
-          {campground.title}
+          {campground && campground.title}
         </Breadcrumb.Item>
       </Breadcrumb>
 
@@ -52,60 +55,43 @@ function ShowCampground(props) {
               <Card.Body>
                 <div className="mar-l">
                   <Card.Title>{campground.title}</Card.Title>
-
                   <Card.Title className="text">{campground.price} $</Card.Title>
                 </div>
                 <Card.Text>{campground.description}</Card.Text>
+                <p>by/ {campground.author && campground.author.name}</p>
+                {campground.author && campground.author._id  === user._id &&(          
                 <div className="mar-r">
-                  <a className="show-btn" href={campground._id + "/edit"}>
-                    Edit
-                  </a>
-                  <button className="show-btn" onClick={handleDelete}>
-                    Delete
-                  </button>
-                </div>
+                    <a className="show-btn" href={campground._id + "/edit"}>
+                      Edit
+                    </a>
+                    <button className="show-btn" onClick={handleDelete}>
+                      Delete
+                    </button>
+                  </div>
+                )}
+       
               </Card.Body>
             </Card>
           </Col>
           <Col xl={5}>
             <Card>
-              <Card.Body className="content">
+              <Card.Body className="reviews">
+                <div>
+        
+                </div>
                 <hr />
+                  <ReviewsHandler  campId={campId} user={user} campground ={campground} isAuhenticated={isAuhenticated}/>
+                  
+                
 
-                <Form
-                  onSubmit={handleSubmitReview}
-                  className="needs-validation"
-                  noValidate
-                >
-                  <Form.Group controlId="formBasicRange">
-                    <Form.Label>Range</Form.Label>
-                    <Form.Control
-                      type="range"
-                      min="0"
-                      max="5"
-                      onChange={(e) => setRating(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Form.Group controlId="exampleForm.ControlTextarea1">
-                    <Form.Label>Example textarea</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      rows={2}
-                      onChange={(e) => setTextComment(e.target.value)}
-                      required
-                    />
-                  </Form.Group>
-                  <Button variant="success" type="submit">
-                    Add Review
-                  </Button>
-                </Form>
+               
+   
               </Card.Body>
             </Card>
           </Col>
         </Row>
       )}
-    </Container>
+   </Container>
   );
 }
 

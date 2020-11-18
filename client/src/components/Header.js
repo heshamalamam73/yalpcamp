@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { Navbar, Nav, NavDropdown } from "react-bootstrap";
-import { useSelector, useDispatch } from "react-redux";
-import { signout } from "../action/userAction";
+
+import { Navbar, Nav } from "react-bootstrap";
+import {  useDispatch,useSelector } from "react-redux";
+import { signout } from "../redux/action/userAction";
 function Header(props) {
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated } = currentUser;
   const dispatch = useDispatch();
   const handleLogOut = (e) => {
     e.preventDefault();
-    console.log("logOut");
     dispatch(signout());
   };
   const userLinks = (
@@ -26,11 +27,9 @@ function Header(props) {
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto"></Nav>
         <Nav>
-          {props.userInfo ? userLinks : gustLinks}
-          {console.log(props)}
-
+     
+          {isAuhenticated? userLinks : gustLinks}
           <Nav.Link href="/campgrounds">All Campgrounds</Nav.Link>
-
           <Nav.Link eventKey={2} href="/new">
             Create Campground
           </Nav.Link>

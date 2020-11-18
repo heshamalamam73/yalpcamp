@@ -1,33 +1,40 @@
 import { useState, useEffect } from "react";
 import { Form, Button, Container, Row } from "react-bootstrap";
 import axios from "axios";
-import { validationFunc } from "../helper/validationForms.js";
-
+import { validationFunc } from "../../redux/helper/validationForms";
+import {postNewCampground} from '../../redux/action/campgroundAction'
+import {useDispatch , useSelector} from "react-redux"
 function CreateCampground(props) {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
+  const dispatch = useDispatch();
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated, user} = currentUser;
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
 
-    const campground = { title, location, image, description, price };
-    axios
-      .post("/api//campgrounds", campground)
-      .then((res) => {
-        // props.history.push("/campgrounds");
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-  /////////////////validation finction
   useEffect(() => {
     validationFunc();
-  }, []);
-  /////////////////////
+    if (!isAuhenticated ){
+      props.history.push(`/signin`);
+      
+
+    }
+    console.log(user._id)
+  }, [isAuhenticated , user ]);
+  const handleSubmit = (e) => {
+    const author = user._id
+
+    const campground = { title, location, image, description, price, author };
+ 
+    dispatch(postNewCampground(campground));
+    props.history.push(`/campgrounds/`);
+
+  };
+
+
   return (
     <Container className="create-camp">
       <Row>

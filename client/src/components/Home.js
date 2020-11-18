@@ -2,13 +2,13 @@ import { useSelector } from "react-redux";
 import { useEffect } from "react";
 
 function Home(props) {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated } = currentUser;
   const redirect = props.location.search
     ? props.location.search.split("=")[1]
     : "/campgrounds";
   useEffect(() => {
-    if (userInfo) {
+    if (isAuhenticated) {
       props.history.push(redirect);
     } else {
       props.history.push("/");
@@ -16,7 +16,7 @@ function Home(props) {
     return () => {
       //
     };
-  }, [userInfo, props.history, redirect]);
+  }, [isAuhenticated, props.history, redirect,currentUser]);
   return (
     <div className="home">
       <div className="content">

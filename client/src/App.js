@@ -1,6 +1,4 @@
 import "./App.css";
-import { useSelector } from "react-redux";
-
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import Campgrounds from "./components/Campgrounds";
 import ShowCampground from "./components/screens/show";
@@ -10,15 +8,16 @@ import Home from "./components/Home";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SignInScreen from "./components/User/SigninScreen";
+import {useSelector} from "react-redux"
 
 function App() {
-  const userSignin = useSelector((state) => state.userSignin);
-  const { userInfo } = userSignin;
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated,user } = currentUser;
 
   return (
-    <Router>
+    <Router >
       <div className="App">
-        <Header userInfo={userInfo} />
+        <Header  />
 
         <div className="content">
           <Route path="/" component={Home} exact={true} />
@@ -32,7 +31,7 @@ function App() {
             //   signup = "signup";
             // }}
           />
-          <Route path="/new" component={CreateCampground} exact={true} />
+          <Route path="/new" component={CreateCampground} exact={true}  user={user} isAuhenticated = {isAuhenticated}/>
           <Route
             path="/campgrounds/:id"
             component={ShowCampground}
