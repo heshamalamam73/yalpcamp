@@ -6,7 +6,12 @@ const campgroundSchema = new mongoose.Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true },
   location: { type: String, required: true },
-  image: { type: String, required: true },
+  images: [
+    {
+      url : String , 
+      file_name : String
+    }
+  ],
   reviews: [
     {
       type: Schema.Types.ObjectId,
@@ -17,6 +22,8 @@ const campgroundSchema = new mongoose.Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  time : { type : Date, default: Date.now }
+
 });
 const campgroundModel = mongoose.model("Campground", campgroundSchema);
 export default campgroundModel;

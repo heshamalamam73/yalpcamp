@@ -22,15 +22,14 @@ function CreateCampground(props) {
       
     }
     console.log(user._id)
-  }, [isAuhenticated , user ]);
-  const handleSubmit = (e) => {
-    const author = user._id
+  }, [isAuhenticated , user,dispatch ]);
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const author = user._id
     const campground = { title, location, image, description, price, author };
- 
     dispatch(postNewCampground(campground));
     props.history.push(`/`);
-
   };
 
 

@@ -11,18 +11,21 @@
     "bootstrap": "^4.5.3",
     "js-cookie": "^2.2.1",
     "jwt-decode": "^3.1.1",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.32",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^17.0.1",
+    "react-moment": "^1.0.0",
     "react-redux": "^7.2.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.0",
     "reactstrap": "^8.7.1",
     "redux": "^4.0.5",
     "redux-thunk": "^2.3.0",
+    "serve": "^11.3.2",
     "web-vitals": "^0.2.4",
-    "yarn": "^1.22.10",
-    "serve": "^11.3.2"
+    "yarn": "^1.22.10"
   },
   "scripts": {
     "dev": "react-scripts start ",

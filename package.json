@@ -2,7 +2,6 @@
   "name": "yalpcamps",
   "type": "module",
   "version": "1.0.0",
-
   "description": "yalpcamp project ",
   "main": "app.js",
   "scripts": {
@@ -30,5 +29,8 @@
     "mongoose": "^5.10.13",
     "multer": "^1.4.2",
     "nodemon": "^2.0.6"
+  },
+  "devDependencies": {
+    "prettier": "2.1.2"
   }
 }

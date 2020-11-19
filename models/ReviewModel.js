@@ -6,7 +6,9 @@ const reviewSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "User"
   },
-  campground : { type: mongoose.Schema.Types.ObjectId, ref: "Campground"}
+  campground : { type: mongoose.Schema.Types.ObjectId, ref: "Campground"},
+  time : { type : Date, default: Date.now }
+
 });
 const ReviewModel = mongoose.model("Review", reviewSchema);
 export default ReviewModel;

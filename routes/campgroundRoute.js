@@ -7,7 +7,7 @@ import { isAuth } from "../util.js";
 const router = express.Router();
 
 router.get("/",async (req, res) => {
-  const campgrounds = await Campground.find({});
+  const campgrounds = await Campground.find({}).populate("author")
   res.send(campgrounds);
 });
 router.post(

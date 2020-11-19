@@ -7,12 +7,14 @@ const userSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true, dropDups: true },
   password: { type: String, required: true },
   isAdmin: { type: Boolean, required: true, default: false },
+  avatar : { type: String , default : "https://res.cloudinary.com/momuzio/image/upload/v1605729168/avatar.png"},
   campgrounds: [
     {
       type: Schema.Types.ObjectId,
       ref: "Campground",
     },
   ],
+  time : { type : Date, default: Date.now }
 });
 userSchema.pre("save", async function (next) {
   try {

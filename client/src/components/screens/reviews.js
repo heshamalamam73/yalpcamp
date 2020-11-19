@@ -28,8 +28,10 @@ function ReviewsHandler(props){
         const author = currentUserId;
         const review = { rating, textComment , author};
         validationFunc();
-
         dispatch(addNewReview(props.campId,review));
+        // setAllreviews([...reviews , review]);
+        window.location.reload(true);
+
         document.getElementById("form").reset();
 
     
@@ -40,7 +42,6 @@ return(
     <div>
       <p>Reviews </p>
       <hr />
-       {  allreviews.map(review => < ReviewItem review={review} currentUserId ={currentUserId}  />)}
                 {isAuhenticated?(
                   <Form
                    onSubmit={handleSubmitReview}
@@ -86,6 +87,9 @@ return(
                   
                   
                    </div>)}
+
+                   {  allreviews.map(review => < ReviewItem review={review} currentUserId ={currentUserId}  />)}
+
     </div>
  
 
