@@ -1,5 +1,6 @@
 import {  useEffect} from "react";
 import Avatar from '../../avatar.png'
+import {Spinner} from 'react-bootstrap'
 function ReviewItem (props) {
 
     const {review,currentUserId} = props
@@ -7,7 +8,8 @@ function ReviewItem (props) {
 
 
 return (
-    <div className='review-item' key={review._id}>
+    review && review.author? (
+        <div className='review-item' key={review._id}>
         <div className='rating'>
         <img id="avatar" src={review.author ? review.author.avatar : Avatar } alt="avatar" />
 
@@ -20,6 +22,8 @@ return (
        {currentUserId === review.author._id && <button className="btn btn-danger">Delete</button>}
 
     </div>
+    ): null
+    
 )
 
 }

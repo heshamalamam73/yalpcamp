@@ -20,9 +20,10 @@ function ShowCampground(props) {
   // const { newreview } = NewReview;
 
   useEffect(() => {
-    validationFunc();
     dispatch(renderUnCampground(campId));
-  }, [dispatch, campId]);
+    validationFunc();
+
+  }, []);
 
   const handleDelete = (e) => {
     e.preventDefault();
@@ -44,13 +45,11 @@ function ShowCampground(props) {
           active
           href="https://getbootstrap.com/docs/4.0/components/breadcrumb/"
         >
-
           {campground && campground.title}
         </Breadcrumb.Item>
       </Breadcrumb>
       {campground && (
         <Row>
-
           <Col xl={7} className="cardBody">
             <Card>
               {campground.images && campground.images.length > 1 ? (
@@ -63,9 +62,7 @@ function ShowCampground(props) {
                           src={img.url}
                           alt="some images"
                         />
-                        <Carousel.Caption>
-                          {/* <h3>{campground.title}</h3> */}
-                        </Carousel.Caption>
+                   
                       </Carousel.Item>
                     ))}
                 </Carousel>

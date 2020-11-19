@@ -10,8 +10,9 @@ function Campgrounds(props) {
   const {campgrounds,loading , error}= AllCampgrounds;
 
   useEffect(() => {
+
     dispatch(renderAllCampgrounds());
-  }, [dispatch]);
+  }, [  ]);
 
   return (
     <Container className="campgrounds">

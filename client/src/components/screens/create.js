@@ -21,7 +21,6 @@ function CreateCampground(props) {
       props.history.push(`/signin`);
       
     }
-    console.log(user._id)
   }, [isAuhenticated , user,dispatch ]);
 
   const handleSubmit = (e) => {
