@@ -1,4 +1,12 @@
-import express from "express";
+
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+if( process.env.NODE_ENV !== "production"){
+  require('dotenv').config();
+}
+import express from 'express'
 import mongoose from "mongoose";
 import config from "./config.js";
 import dotenv from "dotenv";
@@ -7,12 +15,18 @@ import userRoute from "./routes/userRoute.js";
 import bodyParser from "body-parser";
 import campgroundRoute from "./routes/campgroundRoute.js";
 import { seedDb } from "./seeds/index.js";
+
 import path from "path";
+var multer = require('multer')
+var cors = require('cors');
+
 const __dirname = path.resolve();
 
 dotenv.config();
 
 const app = express();
+app.use(cors())
+
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -39,7 +53,10 @@ app.use((err, req, res, next) => {
   const { statusCode = 500, message = "samthing went wrong" } = err;
   res.status(statusCode).send(message);
 });
-
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
 // seedDb();
 const port = process.env.PORT || 3000;
 

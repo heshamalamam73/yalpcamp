@@ -18,6 +18,7 @@ function Campgrounds(props) {
     <Container className="campgrounds">
       <Jumbotron>
         <h1>Gallery</h1>
+        <hr />
         <p>A lot of beauteful Campgrounds you will found here ! </p>
       </Jumbotron>
       {loading &&  <Spinner animation="border" className="spinner" variant="primary" />

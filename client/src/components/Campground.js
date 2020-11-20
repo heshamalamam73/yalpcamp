@@ -13,18 +13,18 @@ function Campground(props) {
               <Card.Img variant="top" src={campground.images[0].url} />
             )}
             <Card.Body>
-            <p className="text-muted ">{campground.price} $</p>
+            <Card.Title className="text-muted ">{campground.price} $</Card.Title>
             <Card.Title className="text-muted ">{campground.title}</Card.Title>
 
               {campground.author && (
-                <span className="text-muted "> By/ {campground.author.name}</span>
+                <Card.Title className="text-muted "> By/ {campground.author.name}</Card.Title>
               )}
               <Card.Text>
                 {campground.time && (
-                  <span className="text-muted ">
+                  <Card.Title className="text-muted ">
                     {" "}
                     <Moment fromNow>{campground.time}</Moment>
-                  </span>
+                  </Card.Title>
                 )}
               </Card.Text>
             </Card.Body>

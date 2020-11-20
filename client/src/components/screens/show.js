@@ -30,7 +30,7 @@ function ShowCampground(props) {
     axios
       .delete(`/api/campgrounds/${campId}`)
       .then((res) => {
-        props.history.push(`/api/campgrounds`);
+        props.history.push(`/campgrounds`);
       })
       .catch((err) => {});
   };

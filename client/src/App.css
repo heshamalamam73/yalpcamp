@@ -195,40 +195,6 @@ button {
 .review-item button{
   font-size:4px;
 }
-@media screen and (max-width: 650px) {
-  .col-12 .card{
-    display: flex!important;
-    flex-direction:row!important;
-    flex-wrap:nowrap;
-    flex-basis: 200px;
-    padding: 0;
-    margin: 0;
-  }
-  .col-12 .card img{
-    flex-basis: 40%;
-    max-width: 40%;
-  }
-  .card-text{
-    padding:0;
-    margin:0;
-    width:100%;
-    font-size:8px;
-  }
-  .card-body{
-    display: flex;
-    flex-direction: column!important;
-  }
-  .card-title, .text , h5 , .card-footer{
-    font-size:8px!important;
-    background-color: white!important;
-  }
-  
-  .show-camp .card {
-    border: none!important;
-    border-radius: 0%;
-  }
-  
-}
 
 /* css reset */
 html, body, div, span, applet, object, iframe,
@@ -277,4 +243,38 @@ table {
 .breadcrumb{
   background-color: white!important;
   margin-top: 10px!important;
+}
+@media screen and (max-width: 650px) {
+  .col-12 .card{
+    display: flex!important;
+    flex-direction:row!important;
+    flex-wrap:nowrap;
+    flex-basis: 200px;
+    padding: 0;
+    margin: 0;
+  }
+  .col-12 .card img{
+    flex-basis: 40%;
+    max-width: 40%;
+  }
+  .card-text{
+    padding:0;
+    margin:0;
+    width:100%;
+    font-size:8px;
+  }
+  .card-body{
+    display: flex;
+    flex-direction: column!important;
+  }
+  .card-title, .text , h5 , .card-footer{
+    font-size:8px!important;
+    background-color: white!important;
+  }
+  
+  .show-camp .card {
+    border: none!important;
+    border-radius: 0%;
+  }
+  
 }

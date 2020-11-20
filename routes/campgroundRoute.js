@@ -1,15 +1,48 @@
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+if( process.env.NODE_ENV !== "production"){
+  require('dotenv').config();
+}
 import express from "express";
 import Campground from "../models/campgroundModel.js";
 import Review from "../models/ReviewModel.js";
 import catchAsync from "../helpers/catchAsync.js";
 import { isAuth } from "../util.js";
+import path from "path";
+var multer = require('multer')
+const cloudinary = require('cloudinary').v2;
+const { CloudinaryStorage } = require('multer-storage-cloudinary');
 
+cloudinary.config({
+  cloud_name : process.env.CLOUDINARY_CLOUD_NAME ,
+  api_key : process.env.CLOUDINARY_KEY , 
+  api_secret : process.env. CLOUDINARY_SECRET
+})
+ const storage = new CloudinaryStorage({
+cloudinary: cloudinary,
+params: {
+  folder: 'yalpcamps',
+  allowedFormats : ['jpeg ' , 'png' , 'jpg']
+},
+});
+
+var upload = multer({storage})
 const router = express.Router();
 
-router.get("/",async (req, res) => {
-  const campgrounds = await Campground.find({}).populate("author")
+
+// router.post ('/', upload.array('file'), async (req, res ,next )=> {
+//   console.log(req.body , req.files)
+//   let images = await req.files.map(f => ({url : f.path , filename : f.filename }))  
+//   // const campground = new Campground(req.body.campground);
+//   // await campground.save();
+//   res.status(200).send(images);
+// });
+
+router.get("/", async (req, res) => {
+  const campgrounds = await Campground.find({}).populate("author");
   res.send(campgrounds);
 });
+
 router.post(
   "/",
   catchAsync(async (req, res, next) => {
@@ -17,7 +50,7 @@ router.post(
       title: req.body.title,
       location: req.body.location,
       price: req.body.price,
-      image: req.body.image,
+      images: req.body.images,
       description: req.body.description,
       author: req.body.author,
     });
@@ -29,6 +62,7 @@ router.post(
     }
   })
 );
+
 
 router.get(
   "/:id",
@@ -75,7 +109,7 @@ router.delete(
 router.post(
   "/:id/reviews",
   catchAsync(async (req, res) => {
-    const campground = await Campground.findById(req.params.id)
+    const campground = await Campground.findById(req.params.id);
     const review = new Review({
       textComment: req.body.textComment,
       rating: req.body.rating,
@@ -91,7 +125,9 @@ router.post(
 router.get(
   "/:id/reviews",
   catchAsync(async (req, res) => {
-    const reviews = await Review.find({ campground:req.params.id}).populate("author")
+    const reviews = await Review.find({ campground: req.params.id }).populate(
+      "author"
+    );
     res.status(200).send(reviews);
   })
 );

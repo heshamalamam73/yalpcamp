@@ -2,14 +2,14 @@ import mongoose from "mongoose";
 const Schema = mongoose.Schema;
 
 const campgroundSchema = new mongoose.Schema({
-  title: { type: String, required: true },
-  price: { type: Number, required: true },
-  description: { type: String, required: true },
-  location: { type: String, required: true },
+  title: { type: String, required: false },
+  price: { type: Number, required: false },
+  description: { type: String, required: false },
+  location: { type: String, required: false },
   images: [
     {
       url : String , 
-      file_name : String
+      filename : String
     }
   ],
   reviews: [

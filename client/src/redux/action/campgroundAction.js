@@ -25,10 +25,10 @@ dispatch({ type : GET_CAMPGROUND_SUCCESS , payload : data})
 }   
 }
 
-const postNewCampground = (campground)=> async (dispatch)=> {
+const postNewCampground = (campground )=> async (dispatch)=> {
     dispatch({ type :POST_CAMPGROUND_REQUEST , payload:{campground}})
 try{
-    const { data} = await axios.post("/api//campgrounds", campground)
+    const { data} = await axios.post("/api/campgrounds" ,campground )
     dispatch({ type :POST_CAMPGROUND_SUCCESS , payload:{data}})
 
 }catch (error){
