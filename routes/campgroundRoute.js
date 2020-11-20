@@ -83,7 +83,7 @@ router.put(
       campground.description = req.body.description;
       campground.price = req.body.price;
       campground.title = req.body.title;
-      campground.image = req.body.image;
+      campground.images = req.body.images;
       const updatedCampground = await campground.save();
       if (updatedCampground) {
         return res

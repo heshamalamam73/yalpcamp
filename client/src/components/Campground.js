@@ -19,14 +19,13 @@ function Campground(props) {
               {campground.author && (
                 <Card.Title className="text-muted "> By/ {campground.author.name}</Card.Title>
               )}
-              <Card.Text>
+              <Card.Title>
                 {campground.time && (
-                  <Card.Title className="text-muted ">
-                    {" "}
+                  <span className="text-muted ">
                     <Moment fromNow>{campground.time}</Moment>
-                  </Card.Title>
+                  </span>
                 )}
-              </Card.Text>
+              </Card.Title>
             </Card.Body>
           </Card>
         </Link>

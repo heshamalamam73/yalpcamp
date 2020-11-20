@@ -278,3 +278,13 @@ table {
   }
   
 }
+.fom-fotor {
+  display: inline-block;
+  flex-direction: column;
+  
+}
+.fom-fotor img{
+width:60px;
+height: 60px;
+padding: 10px;
+}

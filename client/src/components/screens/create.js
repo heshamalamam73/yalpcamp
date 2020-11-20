@@ -6,11 +6,11 @@ import {postNewCampground} from '../../redux/action/campgroundAction'
 import {useDispatch , useSelector} from "react-redux"
 import Message from './Message'
 import Progress from './Progress'
+
 function CreateCampground(props) {
   const [title, setTitle] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
-  
   const [description, setDescription] = useState("");
   const [file, setFile] = useState('');
   const [filename, setFilename] = useState('Choose File');
@@ -34,9 +34,9 @@ function CreateCampground(props) {
   const onChangeHandler = (e) => {
     setFile(e.target.files[0]);
     setFilename(e.target.files[0].name);
+    setUploadedFile('')
   }
   const onSubmit = async e => {
-    console.log(file , filename)
     e.preventDefault();
     const formData = new FormData();
     formData.append('file', file);
@@ -53,8 +53,7 @@ function CreateCampground(props) {
             )
           );
           // Clear percentage
-          setTimeout(() => setUploadPercentage(0), 1000);
-          setTimeout(() => setMessage(''), 1000);
+          setTimeout(() => setUploadPercentage(0), 500);
 
         }
       });
@@ -64,8 +63,8 @@ function CreateCampground(props) {
       setImages([...images ,newImage])
       setUploadedFile({ filename, url });
       setMessage('File Uploaded');
-      console.log(uploadedFile)
-
+      setFile('')
+      setFilename('Upload Others')
     
 
     } catch (err) {
@@ -75,7 +74,7 @@ function CreateCampground(props) {
         setMessage(err.response.data.msg);
       }
     }
-   
+
   };
 
   const handleSubmit = (e) => {
@@ -150,45 +149,54 @@ function CreateCampground(props) {
           </Form.Group>
           <Form.Group controlId="Image">
             <Form.Label>Images</Form.Label>
-            {message? <Message msg={message} /> : null}
-            <Form.Control
-              type="file"
-              placeholder="Campground Image"
-              onChange={onChangeHandler}
-              name="file"
-      
-              multiple
-            />
-             {/* <Button variant="primary"  onClick={onSubmit}>Upload</Button> */}
-             <Button variant="primary"  onClick={onSubmit} >
-               {uploadPercentage > 0 && 
-                  <Spinner
-                  as="span"
-                  animation="grow"
-                  size="sm"
-                  role="status"
-                  aria-hidden="true"
-               /> }
-               { uploadPercentage > 0  ?" Loading... " :  "Upload"}
-            </Button>
-              {/* {uploadedFile ? (
-              <div className='row mt-5'>
-                <div className='col-md-6 m-auto'>
-                  <h3 className='text-center'>{uploadedFile.fileName}</h3>
-                  <img style={{ width: "60px" }} src={uploadedFile.url} alt='' />
-                </div>
-              </div>
-            ) : null} */}
-     
-                 
-            {/* {uploadPercentage > 0 && <Progress percentage={uploadPercentage} />} */}
+            {/* {message? <Message msg={message} /> : null} */}
+             <div className='custom-file mb-4'>
+          <input
+            type='file'
+            className='custom-file-input'
+            id='Image'
+            onChange={onChangeHandler}
+          />
+          <label className='custom-file-label' htmlFor='Image'>
+            {filename}
+          </label>
+        </div>
             
           </Form.Group>
-          <Button variant="success" type="submit" disabled={images.length === 0}>
+  
+
+
+          {images && images.length > 0  ? (
+                images.map(img => {
+                  return  <div className="fom-fotor"><img  src={img.url} alt='' /></div>
+                })
+            ) : null}
+            <div>
+          
+            {uploadPercentage > 0 ?
+                 <Button variant="primary" disabled>
+                 <Spinner
+                   as="span"
+                   animation="grow"
+                   size="sm"
+                   role="status"
+                   aria-hidden="true"
+                 />
+                 Loading...
+               </Button> : 
+                 
+              <Button  variant="primary"  onClick={onSubmit} disabled={uploadedFile}>   
+              Upload 
+             </Button>
+   
+             } 
+            <Button  variant="success" type="submit" disabled={images.length === 0} block >
             Add Campground
           </Button>
+            </div>
+            
         </Form>
-       
+      
       </Row>
     </Container>
   )

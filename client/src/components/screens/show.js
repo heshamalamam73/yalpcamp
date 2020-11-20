@@ -1,9 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState } from "react";
 import axios from "axios";
 import { validationFunc } from "../../redux/helper/validationForms.js";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Container, Row, Col, Card, Carousel ,Spinner} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
+
 import { renderUnCampground } from "../../redux/action/campgroundAction";
 import ReviewsHandler from "./reviews";
 import Moment from "react-moment";
@@ -49,14 +50,14 @@ function ShowCampground(props) {
         </Breadcrumb.Item>
       </Breadcrumb>
       {campground && (
-        <Row>
-          <Col xl={7} className="cardBody">
+        <Row >
+          <Col xl={7} className="cardBody" key={campground._id}>
             <Card>
               {campground.images && campground.images.length > 1 ? (
                 <Carousel>
                   {campground.images &&
                     campground.images.map((img) => (
-                      <Carousel.Item>
+                      <Carousel.Item key={img._id}>
                         <img
                           className="d-block w-100"
                           src={img.url}
@@ -86,6 +87,7 @@ function ShowCampground(props) {
                     alt="avatar"
                   />
                   <span className="text-muted ">{campground.author && campground.author.name}</span>
+                  <hr />
                 </div>
 
                 <Card.Text className="text-muted ">{campground.description}</Card.Text>
