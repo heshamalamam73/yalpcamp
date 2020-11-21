@@ -15,32 +15,25 @@ function Campgrounds(props) {
   }, []);
 
   return (
-    <Container className="campgrounds">
-      <Jumbotron>
-        {campgrounds ? <ClusterMap campgrounds={campgrounds} /> : null
-        }
-
-        <p>A lot of beauteful Campgrounds you will found here ! </p>
-        <Form>
-          <Form.Group as={Row} controlId="formPlaintextPassword">
-
-            <Col sm="8">
-              <Form.Control type="text" placeholder="Search" />
-            </Col>
-          </Form.Group>
-
-        </Form>
-      </Jumbotron>
-      {loading && <Spinner animation="border" className="spinner" variant="primary" />
+    <div>
+      {campgrounds ? <ClusterMap campgrounds={campgrounds} /> : null
       }
-      {error && <div>{error}</div>}
-      <Row>
-        {campgrounds &&
-          campgrounds.map((campground) => (
-            <Campground campground={campground} key={campground._id} />
-          ))}
-      </Row>
-    </Container>
+      <Container className="campgrounds">
+
+
+
+        {loading && <Spinner animation="border" className="spinner" variant="primary" />
+        }
+        {error && <div>{error}</div>}
+        <Row>
+          {campgrounds &&
+            campgrounds.map((campground) => (
+              <Campground campground={campground} key={campground._id} />
+            ))}
+        </Row>
+      </Container>
+    </div>
+
   );
 }
 export default Campgrounds;

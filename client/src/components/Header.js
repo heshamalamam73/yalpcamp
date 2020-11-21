@@ -1,6 +1,6 @@
 
 import { Navbar, Nav } from "react-bootstrap";
-import {  useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { signout } from "../redux/action/userAction";
 function Header(props) {
   const currentUser = useSelector((state) => state.currentUser);
@@ -21,14 +21,14 @@ function Header(props) {
     </Nav.Link>
   );
   return (
-    <Navbar collapseOnSelect expand="md" variant="dark" fixed>
+    <Navbar collapseOnSelect expand="sm" variant="light" bg="light" >
       <Navbar.Brand href="/">Yalp Camp</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto"></Nav>
         <Nav>
-     
-          {isAuhenticated? userLinks : gustLinks}
+
+          {isAuhenticated ? userLinks : gustLinks}
           <Nav.Link href="/campgrounds">All Campgrounds</Nav.Link>
           <Nav.Link eventKey={2} href="/new">
             Create Campground

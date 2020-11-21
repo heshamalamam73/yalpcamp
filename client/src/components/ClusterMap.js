@@ -18,7 +18,7 @@ export default class ClusterMap extends Component {
     mapboxgl.accessToken = 'pk.eyJ1IjoibWFobW91ZG9raWx5IiwiYSI6ImNraHJvazltMDQyMWMyc2w2dTVsOWthaWoifQ.3VZKZXPcOEPCaQki7K6Lhg';
     var map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/dark-v10',
+      style: 'mapbox://styles/mapbox/streets-v11',
       center: [-103.59179687498357, 40.66995747013945],
       zoom: 1
     });
@@ -54,20 +54,20 @@ export default class ClusterMap extends Component {
           'circle-color': [
             'step',
             ['get', 'point_count'],
-            '#51bbd6',
+            '#f4f3f4',
             100,
-            '#f1f075',
+            '#eee',
             750,
-            '#f28cb1'
+            '#eee'
           ],
           'circle-radius': [
             'step',
             ['get', 'point_count'],
-            20,
+            10,
             100,
-            30,
+            15,
             750,
-            40
+            25
           ]
         }
       });

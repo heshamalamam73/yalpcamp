@@ -14,7 +14,7 @@
 }
 
 .home {
-    background-image: url("https://images.pexels.com/photos/939723/pexels-photo-939723.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
+    background-image: url("https://images.pexels.com/photos/1230302/pexels-photo-1230302.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -92,19 +92,12 @@ p {
     opacity: 1;
 }
 
-.jumbotron {
-    padding: 5px!important;
-    height: auto !important;
-    background-color: #2c3e50 !important;
-    color: white;
-}
-
 .navbar {
-    background-color: #2c3e50 !important;
+    /* background-color: #2c3e50 !important; */
 }
 
 .App {
-    background-color: #2c3e50;
+    /* background-color: #2c3e50; */
     min-height: 100vh;
 }
 
@@ -120,8 +113,6 @@ p {
 .footer {
     height: 50px;
     text-align: center;
-    background-color: #2c3e50 !important;
-    color: white;
     align-items: center;
     display: flex;
     justify-content: center;
@@ -177,15 +168,15 @@ p {
 }
 
 .create-camp .form {
-    background-color: #2c3e50;
-    color: white;
-    min-height: 80vh;
+    background-color: #f5f5f5;
+    /* color: white; */
+    min-height: 100vh;
     margin: 0px auto;
     width: 100%;
     max-width: 500px;
     text-align: left;
     padding: 30px;
-    border: 1px solid #eee;
+    border: 2px solid #eee;
     /* box-shadow: 0px 1px 3px 2px black; */
     font-family: "Source Code Pro", monospace;
 }
@@ -443,7 +434,7 @@ table {
     top: 0;
     left: 0;
     margin: 12px;
-    background-color: #404040;
+    /* background-color: #404040; */
     color: #ffffff;
     z-index: 1 !important;
     padding: 6px;
