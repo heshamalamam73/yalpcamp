@@ -21,7 +21,7 @@ function Header(props) {
     </Nav.Link>
   );
   return (
-    <Navbar collapseOnSelect expand="sm" variant="light" bg="light" >
+    <Navbar collapseOnSelect expand="sm" variant="light"  >
       <Navbar.Brand href="/">Yalp Camp</Navbar.Brand>
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">

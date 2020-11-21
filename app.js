@@ -6,6 +6,8 @@ const require = createRequire(import.meta.url);
 if (process.env.NODE_ENV !== "production") {
   require('dotenv').config();
 }
+import helmet from 'helmet'
+import mongooSanitize from 'express-mongo-sanitize'
 import express from 'express'
 import mongoose from "mongoose";
 import config from "./config.js";
@@ -33,6 +35,12 @@ app.use(cors())
 app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(mongooSanitize());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 mongoose
   .connect(mongodbUrl, {
     useNewUrlParser: true,

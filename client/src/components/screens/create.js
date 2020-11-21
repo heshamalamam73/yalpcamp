@@ -1,9 +1,9 @@
 import { useState, useEffect } from "react";
-import { Form, Button, Container, Row ,Spinner } from "react-bootstrap";
+import { Form, Button, Container, Row, Spinner } from "react-bootstrap";
 import axios from "axios";
 import { validationFunc } from "../../redux/helper/validationForms";
-import {postNewCampground} from '../../redux/action/campgroundAction'
-import {useDispatch , useSelector} from "react-redux"
+import { postNewCampground } from '../../redux/action/campgroundAction'
+import { useDispatch, useSelector } from "react-redux"
 import Message from './Message'
 import Progress from './Progress'
 
@@ -19,17 +19,17 @@ function CreateCampground(props) {
   const [uploadPercentage, setUploadPercentage] = useState(0);
   const dispatch = useDispatch();
   const currentUser = useSelector((state) => state.currentUser);
-  const { isAuhenticated, user} = currentUser;
-  const [images , setImages ] = useState([]);
+  const { isAuhenticated, user } = currentUser;
+  const [images, setImages] = useState([]);
 
 
-  useEffect(() => { 
+  useEffect(() => {
     validationFunc();
-    if (!isAuhenticated ){
+    if (!isAuhenticated) {
       props.history.push(`/signin`);
-      
+
     }
-  }, [isAuhenticated , user,dispatch ]);
+  }, [isAuhenticated, user, dispatch]);
 
   const onChangeHandler = (e) => {
     setFile(e.target.files[0]);
@@ -59,13 +59,13 @@ function CreateCampground(props) {
       });
       const url = res.data.secure_url
       const filename = res.data.original_filename
-      const newImage = {url , filename }
-      setImages([...images ,newImage])
+      const newImage = { url, filename }
+      setImages([...images, newImage])
       setUploadedFile({ filename, url });
       setMessage('File Uploaded');
       setFile('')
       setFilename('Upload Others')
-    
+
 
     } catch (err) {
       if (err.response.status === 500) {
@@ -80,20 +80,20 @@ function CreateCampground(props) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const author = user._id
-    const campground = { title, location, description,images, price, author };
-    if(images.length === 0 ){
+    const campground = { title, location, description, images, price, author };
+    if (images.length === 0) {
       console.log(images)
       console.log(campground)
     }
-    else{
-      dispatch(postNewCampground(campground ));
+    else {
+      dispatch(postNewCampground(campground));
 
     }
-    // props.history.push(`/`);
+    props.history.push(`/`);
   }
-   
 
-  
+
+
 
 
   return (
@@ -150,56 +150,56 @@ function CreateCampground(props) {
           <Form.Group controlId="Image">
             <Form.Label>Images</Form.Label>
             {/* {message? <Message msg={message} /> : null} */}
-             <div className='custom-file mb-4'>
-          <input
-            type='file'
-            className='custom-file-input'
-            id='Image'
-            onChange={onChangeHandler}
-          />
-          <label className='custom-file-label' htmlFor='Image'>
-            {filename}
-          </label>
-        </div>
-            
-          </Form.Group>
-  
-
-
-          {images && images.length > 0  ? (
-                images.map(img => {
-                  return  <div className="fom-fotor"><img  src={img.url} alt='' /></div>
-                })
-            ) : null}
-            <div>
-          
-            {uploadPercentage > 0 ?
-                 <Button variant="primary" disabled>
-                 <Spinner
-                   as="span"
-                   animation="grow"
-                   size="sm"
-                   role="status"
-                   aria-hidden="true"
-                 />
-                 Loading...
-               </Button> : 
-                 
-              <Button  variant="primary"  onClick={onSubmit} disabled={uploadedFile}>   
-              Upload 
-             </Button>
-   
-             } 
-            <Button  variant="success" type="submit" disabled={images.length === 0} block >
-            Add Campground
-          </Button>
+            <div className='custom-file mb-4'>
+              <input
+                type='file'
+                className='custom-file-input'
+                id='Image'
+                onChange={onChangeHandler}
+              />
+              <label className='custom-file-label' htmlFor='Image'>
+                {filename}
+              </label>
             </div>
-            
+
+          </Form.Group>
+
+
+
+          {images && images.length > 0 ? (
+            images.map(img => {
+              return <div className="fom-fotor"><img src={img.url} alt='' /></div>
+            })
+          ) : null}
+          <div>
+
+            {uploadPercentage > 0 ?
+              <Button variant="primary" disabled>
+                <Spinner
+                  as="span"
+                  animation="grow"
+                  size="sm"
+                  role="status"
+                  aria-hidden="true"
+                />
+                 Loading...
+               </Button> :
+
+              <Button variant="primary" onClick={onSubmit} disabled={uploadedFile}>
+                Upload
+             </Button>
+
+            }
+            <Button variant="success" type="submit" disabled={images.length === 0} block >
+              Add Campground
+          </Button>
+          </div>
+
         </Form>
-      
+
       </Row>
     </Container>
   )
 }
- 
+
 export default CreateCampground;

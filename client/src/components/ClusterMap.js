@@ -84,6 +84,7 @@ export default class ClusterMap extends Component {
         }
       });
 
+
       map.addLayer({
         id: 'unclustered-point',
         type: 'circle',
@@ -96,6 +97,8 @@ export default class ClusterMap extends Component {
           'circle-stroke-color': '#fff'
         }
       });
+
+      map.addControl(new mapboxgl.NavigationControl());
 
       // inspect a cluster on click
       map.on('click', 'clusters', function (e) {
@@ -113,6 +116,7 @@ export default class ClusterMap extends Component {
               zoom: zoom
             });
           }
+
         );
       });
 

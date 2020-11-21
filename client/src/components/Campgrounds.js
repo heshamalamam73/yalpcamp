@@ -12,7 +12,7 @@ function Campgrounds(props) {
   useEffect(() => {
 
     dispatch(renderAllCampgrounds());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>
