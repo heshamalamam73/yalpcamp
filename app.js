@@ -3,7 +3,7 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 
-if( process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
   require('dotenv').config();
 }
 import express from 'express'
@@ -17,7 +17,7 @@ import campgroundRoute from "./routes/campgroundRoute.js";
 import { seedDb } from "./seeds/index.js";
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN
-const geocoder  = mbxGeocoding({accessToken : mapBoxToken})
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
 
 import path from "path";
 var multer = require('multer')

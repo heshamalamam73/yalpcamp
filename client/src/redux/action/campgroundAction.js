@@ -14,7 +14,7 @@ import {
 const renderAllCampgrounds = () => async (dispatch) => {
     dispatch({ type: GET_CAMPGROUNDS_REQUEST });
     try {
-        const { data } = await axios.get("/api/campgrounds");
+        const { data } = await axios.get("/api/campgrounds")
         dispatch({ type: GET_CAMPGROUNDS_SUCCESS, payload: data });
     } catch (error) {
         dispatch({ type: GET_CAMPGROUNDS_FAILURE, payload: error });
@@ -32,7 +32,7 @@ const renderUnCampground = (id) => async (dispatch) => {
 };
 
 const postNewCampground = (campground) => async (dispatch) => {
-    
+
     dispatch({ type: POST_CAMPGROUND_REQUEST, payload: { campground } });
     try {
         const { data } = await axios.post("/api/campgrounds", campground);
@@ -40,7 +40,7 @@ const postNewCampground = (campground) => async (dispatch) => {
     } catch (error) {
         dispatch({ type: POST_CAMPGROUND_FAILURE, payload: error });
     }
-    
+
 };
 
 

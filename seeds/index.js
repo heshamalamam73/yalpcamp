@@ -14,20 +14,23 @@ export const seedDb = async () => {
       price: price,
       geometry: {
         type: "Point",
-        coordinates : [-113.1331 , 47.0202]
+        coordinates: [
+          cities[rendom1000].longitude,
+          cities[rendom1000].latitude
+        ]
       },
       images: [
         {
-          url : "https://source.unsplash.com/collection/483251" ,
-          filename : "image1" 
+          url: "https://source.unsplash.com/collection/483251",
+          filename: "image1"
         },
         {
-          url : "https://source.unsplash.com/collection/483251" ,
-          filename : "image2" 
+          url: "https://source.unsplash.com/collection/483251",
+          filename: "image2"
         },
         {
-          url : "https://source.unsplash.com/collection/483251" ,
-          filename : "image3" 
+          url: "https://source.unsplash.com/collection/483251",
+          filename: "image3"
         }
       ],
       author: "5fb5800f68011665a09dcb11",

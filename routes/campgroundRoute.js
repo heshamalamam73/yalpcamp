@@ -1,6 +1,6 @@
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
-if( process.env.NODE_ENV !== "production"){
+if (process.env.NODE_ENV !== "production") {
   require('dotenv').config();
 }
 import express from "express";
@@ -14,7 +14,7 @@ const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
 const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
 const mapBoxToken = process.env.MAPBOX_TOKEN
-const geocoder  = mbxGeocoding({accessToken : mapBoxToken})
+const geocoder = mbxGeocoding({ accessToken: mapBoxToken })
 
 
 
@@ -31,15 +31,16 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   const campgrounds = await Campground.find({}).populate("author");
+
   res.send(campgrounds);
 });
 
 router.post(
   "/",
   catchAsync(async (req, res, next) => {
-   const geoData =await   geocoder.forwardGeocode({
-     query :req.body.location,
-     limit: 1
+    const geoData = await geocoder.forwardGeocode({
+      query: req.body.location,
+      limit: 1
     }).send()
     const campground = new Campground({
       title: req.body.title,

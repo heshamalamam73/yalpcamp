@@ -418,6 +418,14 @@ table {
     max-height: 300px;
 }
 
+#map {
+    height: 40vh;
+    position: relative;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+}
+
 .mapContainer {
     margin: 0 auto;
     position: absolute;

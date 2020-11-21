@@ -1,8 +1,8 @@
-import React, { useEffect ,useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { validationFunc } from "../../redux/helper/validationForms.js";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
-import { Container, Row, Col, Card, Carousel ,Spinner} from "react-bootstrap";
+import { Container, Row, Col, Card, Carousel, Spinner } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { renderUnCampground } from "../../redux/action/campgroundAction";
 import ReviewsHandler from "./reviews";
@@ -24,7 +24,7 @@ function ShowCampground(props) {
   useEffect(() => {
     dispatch(renderUnCampground(campId));
     validationFunc();
-   
+
 
   }, []);
 
@@ -37,107 +37,107 @@ function ShowCampground(props) {
       .then((res) => {
         props.history.push(`/campgrounds`);
       })
-      .catch((err) => {});
+      .catch((err) => { });
   };
 
   return (
-    loading ?  <Spinner animation="border" variant="primary"  className='spinner'/>:
-    <Container className="show-camp">
-      {error && <div>{error} </div>}
-      <Breadcrumb>
-        <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
-        <Breadcrumb.Item
-          active
-          href="https://getbootstrap.com/docs/4.0/components/breadcrumb/"
-        >
-          {campground && campground.title}
-        </Breadcrumb.Item>
-      </Breadcrumb>
-      {campground && (
-        <Row >
-          <Col xl={7} className="cardBody" key={campground._id}>
-            <Card>
-              {campground.images && campground.images.length > 1 ? (
-                <Carousel>
-                  {campground.images &&
-                    campground.images.map((img) => (
-                      <Carousel.Item key={img._id}>
-                        <img
-                          className="d-block w-100"
-                          src={img.url}
-                          alt="some images"
-                        />
-                   
-                      </Carousel.Item>
-                    ))}
-                </Carousel>
-              ) : (
-                <Card.Img
-                  variant="top"
-                  src={campground.images && campground.images[0].url}
-                />
-              )}
+    loading ? <Spinner animation="border" variant="primary" className='spinner' /> :
+      <Container className="show-camp">
+        {error && <div>{error} </div>}
+        <Breadcrumb>
+          <Breadcrumb.Item href="/">Home</Breadcrumb.Item>
+          <Breadcrumb.Item
+            active
+            href="https://getbootstrap.com/docs/4.0/components/breadcrumb/"
+          >
+            {campground && campground.title}
+          </Breadcrumb.Item>
+        </Breadcrumb>
+        {campground && (
+          <Row >
+            <Col xl={7} className="cardBody" key={campground._id}>
+              <Card>
+                {campground.images && campground.images.length > 1 ? (
+                  <Carousel>
+                    {campground.images &&
+                      campground.images.map((img) => (
+                        <Carousel.Item key={img._id}>
+                          <img
+                            className="d-block w-100"
+                            src={img.url}
+                            alt="some images"
+                          />
 
-              <Card.Body>
-                <div className="mar-l">
-                  <Card.Title className="text-muted ">{campground.title}</Card.Title>
-                                    <Card.Title className="text-muted ">{campground.location}</Card.Title>
+                        </Carousel.Item>
+                      ))}
+                  </Carousel>
+                ) : (
+                    <Card.Img
+                      variant="top"
+                      src={campground.images && campground.images[0].url}
+                    />
+                  )}
+
+                <Card.Body>
+                  <div className="mar-l">
+                    <Card.Title className="text-muted ">{campground.title}</Card.Title>
+                    <Card.Title className="text-muted ">{campground.location}</Card.Title>
 
 
-                  <Card.Title className="text text-muted">{campground.price} $</Card.Title>
-                </div>
-                <div className="div-avatar">
-                  <div className='avatar'>
-                  <img
+                    <Card.Title className="text text-muted">{campground.price} $</Card.Title>
+                  </div>
+                  <div className="div-avatar">
+                    <div className='avatar'>
+                      {/* <img
                     id="avatar"
                     src={campground.author && campground.author.avatar}
                     alt="avatar"
-                  />
+                  /> */}
+                    </div>
+                    <span className="text-muted ">{campground.author && campground.author.name}</span>
                   </div>
-                  <span className="text-muted ">{campground.author && campground.author.name}</span>
-                </div>
 
-                <Card.Text className="text-muted ">{campground.description}</Card.Text>
-                {campground.time && (
-                  <Card.Footer className="text-muted">
-                    {" "}
-                    <Moment fromNow>{campground.time}</Moment>
-                  </Card.Footer>
-                )}
-                {campground.author && campground.author._id === user._id && (
-                  <div className="mar-r">
-                    <a className="show-btn" href={campground._id + "/edit"}>
-                      Edit
+                  <Card.Text className="text-muted ">{campground.description}</Card.Text>
+                  {campground.time && (
+                    <Card.Footer className="text-muted">
+                      {" "}
+                      <Moment fromNow>{campground.time}</Moment>
+                    </Card.Footer>
+                  )}
+                  {campground.author && campground.author._id === user._id && (
+                    <div className="mar-r">
+                      <a className="show-btn" href={campground._id + "/edit"}>
+                        Edit
                     </a>
-                    <button className="show-btn" onClick={handleDelete}>
-                      Delete
+                      <button className="show-btn" onClick={handleDelete}>
+                        Delete
                     </button>
-                  </div>
-                )}
-              </Card.Body>
-            </Card>
-          </Col>
+                    </div>
+                  )}
+                </Card.Body>
+              </Card>
+            </Col>
             <Col xl={5}>
               <Card>
-                       <Card.Body>
-                  {campground.geometry ? <CampgroundMap geometry={campground.geometry} location={campground.location} title={ campground.title}/>  : null}
+                <Card.Body>
+                  {campground.geometry ? <CampgroundMap geometry={campground.geometry} location={campground.location} title={campground.title} /> : null}
 
-              </Card.Body>
-       </Card>
-            <Card>
+                </Card.Body>
+              </Card>
+              <Card>
                 <Card.Body className="reviews">
-                <ReviewsHandler
-                  campId={campId}
-                  currentUserId={user._id}
-                  isAuhenticated={isAuhenticated}
-                />
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-      )}
-    </Container>
-                
+                  <ReviewsHandler
+                    campId={campId}
+                    currentUserId={user._id}
+                    isAuhenticated={isAuhenticated}
+                  />
+                </Card.Body>
+              </Card>
+            </Col>
+          </Row>
+        )}
+      </Container>
+
   );
 }
 
