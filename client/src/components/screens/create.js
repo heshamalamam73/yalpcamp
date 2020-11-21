@@ -89,7 +89,7 @@ function CreateCampground(props) {
       dispatch(postNewCampground(campground ));
 
     }
-    props.history.push(`/`);
+    // props.history.push(`/`);
   }
    
 

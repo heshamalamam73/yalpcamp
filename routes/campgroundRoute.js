@@ -12,21 +12,12 @@ import path from "path";
 var multer = require('multer')
 const cloudinary = require('cloudinary').v2;
 const { CloudinaryStorage } = require('multer-storage-cloudinary');
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN
+const geocoder  = mbxGeocoding({accessToken : mapBoxToken})
 
-cloudinary.config({
-  cloud_name : process.env.CLOUDINARY_CLOUD_NAME ,
-  api_key : process.env.CLOUDINARY_KEY , 
-  api_secret : process.env. CLOUDINARY_SECRET
-})
- const storage = new CloudinaryStorage({
-cloudinary: cloudinary,
-params: {
-  folder: 'yalpcamps',
-  allowedFormats : ['jpeg ' , 'png' , 'jpg']
-},
-});
 
-var upload = multer({storage})
+
 const router = express.Router();
 
 
@@ -46,6 +37,10 @@ router.get("/", async (req, res) => {
 router.post(
   "/",
   catchAsync(async (req, res, next) => {
+   const geoData =await   geocoder.forwardGeocode({
+     query :req.body.location,
+     limit: 1
+    }).send()
     const campground = new Campground({
       title: req.body.title,
       location: req.body.location,
@@ -54,6 +49,7 @@ router.post(
       description: req.body.description,
       author: req.body.author,
     });
+    campground.geometry = geoData.body.features[0].geometry
     const newCampground = await campground.save();
     if (newCampground) {
       res.status(200).send(newCampground);

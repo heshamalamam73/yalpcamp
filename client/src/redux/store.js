@@ -1,35 +1,38 @@
 import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 
 import {
-  userSigninReducer,
-  userRigesterReducer,
-  userSignoutReducer,
-  setCurrentUser
+    userSigninReducer,
+    userRigesterReducer,
+    userSignoutReducer,
+    setCurrentUser,
 } from "./reducers/userReducer.js";
-import {addNewReviewReducer , DeleteReviewReducer,getAllReviewsReducer } from "./reducers/reviewsReducer";
-import {postNewCampgroundReducer } from './reducers/campgroundReducer'
-import {renderAllCampgroundsReducer ,renderUnCampgroundReducer} from "./reducers/campgroundReducer"
+import {
+    addNewReviewReducer,
+    DeleteReviewReducer,
+    getAllReviewsReducer,
+} from "./reducers/reviewsReducer";
+import { postNewCampgroundReducer } from "./reducers/campgroundReducer";
+import {
+    renderAllCampgroundsReducer,
+    renderUnCampgroundReducer,
+} from "./reducers/campgroundReducer";
 import thunk from "redux-thunk";
 
 const reducer = combineReducers({
-  userSignin: userSigninReducer,
-  userRigester: userRigesterReducer,
-  userLogout: userSignoutReducer,
-  AllCampgrounds:renderAllCampgroundsReducer,
-  rendercampground : renderUnCampgroundReducer,
-  currentUser : setCurrentUser,
-  postCampground :postNewCampgroundReducer,
-  NewReview :addNewReviewReducer,
-  allReviews : getAllReviewsReducer
-
+    userSignin: userSigninReducer,
+    userRigester: userRigesterReducer,
+    userLogout: userSignoutReducer,
+    AllCampgrounds: renderAllCampgroundsReducer,
+    rendercampground: renderUnCampgroundReducer,
+    currentUser: setCurrentUser,
+    postCampground: postNewCampgroundReducer,
+    NewReview: addNewReviewReducer,
+    allReviews: getAllReviewsReducer,
 });
 const composeEnhancers =
-  (typeof window !== "undefined" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
-  compose;
+    (typeof window !== "undefined" &&
+        window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__) ||
+    compose;
 
-const store = createStore(
-  reducer,
-  composeEnhancers(applyMiddleware(thunk))
-);
+const store = createStore(reducer, composeEnhancers(applyMiddleware(thunk)));
 export default store;

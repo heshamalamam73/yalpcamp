@@ -15,6 +15,9 @@ import userRoute from "./routes/userRoute.js";
 import bodyParser from "body-parser";
 import campgroundRoute from "./routes/campgroundRoute.js";
 import { seedDb } from "./seeds/index.js";
+const mbxGeocoding = require('@mapbox/mapbox-sdk/services/geocoding');
+const mapBoxToken = process.env.MAPBOX_TOKEN
+const geocoder  = mbxGeocoding({accessToken : mapBoxToken})
 
 import path from "path";
 var multer = require('multer')
