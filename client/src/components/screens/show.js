@@ -4,8 +4,6 @@ import { validationFunc } from "../../redux/helper/validationForms.js";
 import Breadcrumb from "react-bootstrap/Breadcrumb";
 import { Container, Row, Col, Card, Carousel ,Spinner} from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import ReactMapboxGl, { Layer, Feature } from 'react-mapbox-gl';
-import Geocode from "react-geocode";
 import { renderUnCampground } from "../../redux/action/campgroundAction";
 import ReviewsHandler from "./reviews";
 import Moment from "react-moment";
@@ -19,10 +17,7 @@ function ShowCampground(props) {
   const { campground, loading, error } = rendercampground;
   const currentUser = useSelector((state) => state.currentUser);
   const { isAuhenticated, user } = currentUser;
-  const mapboxToken ="pk.eyJ1IjoibWFobW91ZG9raWx5IiwiYSI6ImNraHJpbTQ0MTBhbWIycmxobWV6bWhuemIifQ._4e_fST5IQGKE5VeI8FlwQ"
-  const Map = ReactMapboxGl({
-  accessToken:mapboxToken
-});
+
   // const NewReview = useSelector((state) => state.NewReview);
   // const { newreview } = NewReview;
 
@@ -34,15 +29,7 @@ function ShowCampground(props) {
   }, []);
 
 
-// Geocode.fromAddress(campground.location).then(
-//   response => {
-//     const { lat, lng } = response.results[0].geometry.location;
-//     console.log(lat, lng);
-//   },
-//   error => {
-//     console.error(error);
-//   }
-// );
+
   const handleDelete = (e) => {
     e.preventDefault();
     axios
