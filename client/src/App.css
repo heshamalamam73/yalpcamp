@@ -212,7 +212,7 @@ button {
 }
 
 .review-item .review-comment {
-    font-size: .3rem;
+    font-size: 1rem;
     color: #2c3e50;
 }
 
@@ -392,7 +392,7 @@ table {
     .text,
     h5,
     .card-footer {
-        font-size: 8px!important;
+        /* font-size: 8px!important; */
         background-color: white!important;
     }
     .show-camp .card {
