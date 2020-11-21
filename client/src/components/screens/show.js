@@ -80,14 +80,15 @@ function ShowCampground(props) {
 
                   <Card.Title className="text text-muted">{campground.price} $</Card.Title>
                 </div>
-                <div>
+                <div className="div-avatar">
+                  <div className='avatar'>
                   <img
                     id="avatar"
                     src={campground.author && campground.author.avatar}
                     alt="avatar"
                   />
+                  </div>
                   <span className="text-muted ">{campground.author && campground.author.name}</span>
-                  <hr />
                 </div>
 
                 <Card.Text className="text-muted ">{campground.description}</Card.Text>

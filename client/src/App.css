@@ -2,9 +2,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
 
 #avatar{
-  width:30px;
-  margin:2px;
-  padding:20px 2px;
+  width:23px;
+  /* margin:2px; */
+  /* padding:20px 2px; */
+}
+.avatar{
+  display: flex;
+  flex-direction: column;
+  float: left;
+  padding-right: 10px;
+
 }
 .home {
   background-image: url("https://images.pexels.com/photos/939723/pexels-photo-939723.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940");
@@ -174,26 +181,28 @@ button {
 }
 
 .review-item {
-  /* display: flex; */
-  /* flex-direction: column; */
+  /* display: flex; 
+   flex-direction: column;
   text-align: left;
-  border-bottom: 2px solid #eee;
+  border-bottom: 2px solid #eee; */
   /* padding:10px; */
   /* margin: 10px; */
+  padding: 10px 10px;
+  border-bottom: .4px solid #eee;
+  color: #2c3e50;
+
 }
 
-.review-item .rating {
-  /* display: flex; */
-  flex-direction: row;
-  /* justify-content: space-between; */
-  align-items: center;
-  /* padding:10px 0px; */
-}
+
 .review-item .review-comment{
-  font-size: 1rem;
+  font-size: .3rem;
+  color: #2c3e50;
 }
-.review-item button{
-  font-size:4px;
+.div-avatar {
+  padding: 10px 0px;
+}
+.div-avatar span{
+  font-weight: bolder;
 }
 
 /* css reset */

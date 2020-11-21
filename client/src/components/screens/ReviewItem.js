@@ -9,17 +9,25 @@ function ReviewItem (props) {
 
 return (
     review && review.author? (
-        <div className='review-item' key={review._id}>
-        <div className='rating'>
-        <img id="avatar" src={review.author ? review.author.avatar : Avatar } alt="avatar" />
-
-        <span>{review.author.name} </span>
+        <div  key={review._id} className= "review-item">
+               <div className='rating'>
         <p className="starability-result" data-rating={review.rating}> Rated: {review.rating} </p>
+        </div> 
+        <div className='div-avatar'>
+        <div className='avatar'>
+        <img id="avatar" src={review.author ? review.author.avatar : Avatar } alt="avatar" />
         </div>
+        <span>{review.author.name} </span>
+        </div>
+ 
+     
+    
+      
        <div>
-       <span className="review-comment">{review.textComment}</span>
+       
+       <p className="review-comment">{review.textComment}</p>
        </div>
-       {currentUserId === review.author._id && <button className="btn btn-danger">Delete</button>}
+       {/* {currentUserId === review.author._id && <button className="btn btn-danger">Delete</button>} */}
 
     </div>
     ): null
