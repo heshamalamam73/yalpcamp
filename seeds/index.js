@@ -12,18 +12,22 @@ export const seedDb = async () => {
       location: `${cities[rendom1000].city} , ${cities[rendom1000].state}`,
       title: `${sample(descriptors)} ${sample(places)}`,
       price: price,
+      geometry: {
+        type: "Point",
+        coordinates : [-113.1331 , 47.0202]
+      },
       images: [
         {
           url : "https://source.unsplash.com/collection/483251" ,
-          file_name : "image1" 
+          filename : "image1" 
         },
         {
           url : "https://source.unsplash.com/collection/483251" ,
-          file_name : "image2" 
+          filename : "image2" 
         },
         {
           url : "https://source.unsplash.com/collection/483251" ,
-          file_name : "image3" 
+          filename : "image3" 
         }
       ],
       author: "5fb5800f68011665a09dcb11",

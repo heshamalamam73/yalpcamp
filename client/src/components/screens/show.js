@@ -117,13 +117,15 @@ function ShowCampground(props) {
               </Card.Body>
             </Card>
           </Col>
-          <Col xl={5}>
+            <Col xl={5}>
+              <Card>
+                       <Card.Body>
+                  {campground.geometry ? <CampgroundMap geometry={campground.geometry} location={campground.location} title={ campground.title}/>  : null}
+
+              </Card.Body>
+       </Card>
             <Card>
                 <Card.Body className="reviews">
-                  
-                  {campground.geometry ? <CampgroundMap  geometry = {campground.geometry} />  : null}
-        
-                
                 <ReviewsHandler
                   campId={campId}
                   currentUserId={user._id}
