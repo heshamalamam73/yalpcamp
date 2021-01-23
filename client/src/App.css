@@ -139,7 +139,10 @@ p {
 
 }
 .header{
-    height: 60px;
+    min-height: 60px;
+    z-index: 3!important;
+    background-color: #ffffff!important;
+    height: auto;
 }
 .footer {
   height: 50px;
@@ -190,9 +193,14 @@ p {
   text-transform: capitalize;
   padding-bottom: 20px;
 }
+img{
+    object-fit: cover;
+ 
+}
 
 .show-camp img {
   max-height: 60vh;
+  object-fit: cover;
 }
 
 .mar-l {
