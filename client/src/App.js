@@ -10,25 +10,43 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import SignInScreen from "./components/User/SigninScreen";
 import { useSelector } from "react-redux";
+import NewBtn from "./components/NewBtn";
 
 function App() {
-    const currentUser = useSelector((state) => state.currentUser);
-    const { isAuhenticated, user } = currentUser;
+  const currentUser = useSelector((state) => state.currentUser);
+  const { isAuhenticated, user } = currentUser;
 
-    return (
-        <Router >
-            < div className="App" >
-                < Header />
-                <div className="content" >
-                    <Route path="/"
-                        component={Home}
-                        exact={true} />{" "}
-                    < Route path="/campgrounds" component={Campgrounds} exact={true} />{" "}
-                    <Route path="/signin" component={SignInScreen} exact={true} />{" "} <Route path="/signup" component={SignInScreen} exact={true} />
-                    <Route path="/new" component={CreateCampground} exact={true} user={user} isAuhenticated={isAuhenticated} /> < Route path="/campgrounds/:id" component={ShowCampground} exact={true} /> < Route path="/campgrounds/:id/edit" component={UpdateCampground} exact={true} />
-                </div> </div ><Footer />
-        </Router>
-    );
+  return (
+    <Router>
+      <div className="App">
+        <Header />
+        <div className="content">
+          <Route path="/" component={Home} exact={true} />{" "}
+          <Route path="/campgrounds" component={Campgrounds} exact={true} />{" "}
+          <Route path="/signin" component={SignInScreen} exact={true} />{" "}
+          <Route path="/signup" component={SignInScreen} exact={true} />
+          <Route
+            path="/new"
+            component={CreateCampground}
+            exact={true}
+            user={user}
+            isAuhenticated={isAuhenticated}
+          />{" "}
+          <Route
+            path="/campgrounds/:id"
+            component={ShowCampground}
+            exact={true}
+          />{" "}
+          <Route
+            path="/campgrounds/:id/edit"
+            component={UpdateCampground}
+            exact={true}
+          />
+        </div>{" "}
+      </div>
+      <Footer />
+    </Router>
+  );
 }
 
 export default App;

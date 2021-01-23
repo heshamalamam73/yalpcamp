@@ -1,29 +1,26 @@
 import { useEffect } from "react";
 import Campground from "./Campground";
 import { Row, Jumbotron, Container, Spinner, Form, Col } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux"
-import { renderAllCampgrounds } from "../redux/action/campgroundAction"
-import ClusterMap from './ClusterMap'
+import { useDispatch, useSelector } from "react-redux";
+import { renderAllCampgrounds } from "../redux/action/campgroundAction";
+import ClusterMap from "./ClusterMap";
+import NewBtn from "./NewBtn";
 
 function Campgrounds(props) {
   const dispatch = useDispatch();
   const AllCampgrounds = useSelector((state) => state.AllCampgrounds);
   const { campgrounds, loading, error } = AllCampgrounds;
   useEffect(() => {
-
     dispatch(renderAllCampgrounds());
   }, [dispatch]);
 
   return (
     <div>
-      {campgrounds ? <ClusterMap campgrounds={campgrounds} /> : null
-      }
+      {campgrounds ? <ClusterMap campgrounds={campgrounds} /> : null}
       <Container className="campgrounds">
-
-
-
-        {loading && <Spinner animation="border" className="spinner" variant="primary" />
-        }
+        {loading && (
+          <Spinner animation="border" className="spinner" variant="primary" />
+        )}
         {error && <div>{error}</div>}
         <Row>
           {campgrounds &&
@@ -32,8 +29,8 @@ function Campgrounds(props) {
             ))}
         </Row>
       </Container>
+      <NewBtn />
     </div>
-
   );
 }
 export default Campgrounds;

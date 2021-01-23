@@ -1,6 +1,7 @@
 import { useSelector } from "react-redux";
 import { useEffect } from "react";
-import ClusterMap from './ClusterMap'
+import ClusterMap from "./ClusterMap";
+import NewBtn from "./NewBtn";
 function Home(props) {
   const currentUser = useSelector((state) => state.currentUser);
   const { isAuhenticated } = currentUser;
@@ -19,7 +20,6 @@ function Home(props) {
   }, [isAuhenticated, props.history, redirect, currentUser]);
   return (
     <div className="home">
-
       <div className="content">
         <h1>Welcome to yalp Camp</h1>
         <a className="buttonA" href="/campgrounds">
